@@ -6,7 +6,8 @@ package burgerkingjuancarlos;
 
 public class BurgerKingJuanCarlos implements ModoAdministrador {
 
-    public BurgerKingJuanCarlos() {
+    public void BurgerKingJuanCarlos() {
+        
     }
 
     public static void main(String[] args) {
