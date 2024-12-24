@@ -7,7 +7,7 @@ package burgerkingjuancarlos;
 public class BurgerKingJuanCarlos implements ModoAdministrador {
 
     public void BurgerKingJuanCarlos() {
-        
+        int hola = 4;
     }
 
     public static void main(String[] args) {
