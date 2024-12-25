@@ -30,8 +30,8 @@ public class BurgerKingJuanCarlos implements ModoAdministrador {
 
         // Generar tickets (simulado)
         Ticket pedido = new Ticket(1);
-        pedido.añadirProducto(hamburguesa);
-        pedido.añadirProducto(refresco);
+        pedido.añadirProducto(hamburguesa,1);
+        pedido.añadirProducto(refresco,1);
         admin.ticketpedidos.add(pedido);
         admin.generarTickets();
 

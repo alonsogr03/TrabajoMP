@@ -22,8 +22,11 @@ public class Ticket {
         this.tiempoEstimado = 0;
     }
 
-    public void añadirProducto(Producto producto) {
-        productos.add(producto);
+    public void añadirProducto(Producto producto, int cantidad) {
+        for(int i=0; i<=cantidad; i++){
+            productos.add(producto);
+            
+        }
         precioTotal += producto.getPrecio();
         tiempoEstimado += producto.getTiempoElaboracion();
     }

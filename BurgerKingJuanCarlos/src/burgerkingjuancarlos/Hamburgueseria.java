@@ -13,6 +13,7 @@ public class Hamburgueseria implements ModoCliente,ModoAdministrador,Serializabl
     CatalogoProductos catalogo = new CatalogoProductos();
     ArrayList<Ticket> listadoTickets = new ArrayList<>();
     private Ticket pedido;
+    
    
    
      // Método para realizar un pedido
@@ -42,8 +43,9 @@ public class Hamburgueseria implements ModoCliente,ModoAdministrador,Serializabl
 
             if (opcion > 0 && opcion <= catalogo.getProductos().size()) {
                 Producto productoSeleccionado = catalogo.getProductos().get(opcion - 1);
+                int cantidad=0;
                
-                ticket.añadirProducto(productoSeleccionado);
+                ticket.añadirProducto(productoSeleccionado,cantidad);
                 tiempoTotal += productoSeleccionado.getTiempoElaboracion();
                 System.out.printf("%s agregado al pedido.\n", productoSeleccionado.getNombre());
             } else {
