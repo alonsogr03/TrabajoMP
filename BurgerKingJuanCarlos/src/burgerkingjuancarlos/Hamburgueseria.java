@@ -21,7 +21,7 @@ public class Hamburgueseria implements ModoCliente,ModoAdministrador,Serializabl
 
         Scanner scanner = new Scanner(System.in);
         int longitudListaTickets=listadoTickets.size();
-        Ticket ticket = new Ticket("TICKET" + (longitudListaTickets+1));
+        Ticket ticket = new Ticket(longitudListaTickets+1);
         int tiempoTotal = 0;
 
         System.out.println("--- Realizar Pedido ---");
@@ -53,7 +53,7 @@ public class Hamburgueseria implements ModoCliente,ModoAdministrador,Serializabl
             }
         }
         pedido.setTiempoEstimado(tiempoTotal);
-        listadoTickets.add(pedido));
+        listadoTickets.add(pedido);
         System.out.printf("Pedido finalizado. Tiempo estimado: %d segundos, Precio total: %d céntimos\n",
                 ticket.getTiempoEstimado(), ticket.getPrecioTotal());
     }
