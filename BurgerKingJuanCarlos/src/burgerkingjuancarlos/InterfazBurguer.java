@@ -15,8 +15,6 @@ import javax.swing.JPanel;
  * @author PC10
  */
 public class InterfazBurguer extends javax.swing.JFrame {
-
-    FondoPanel fondo = new FondoPanel();
     /**
      * Creates new form InterfazBurguer
      */
@@ -37,10 +35,19 @@ public class InterfazBurguer extends javax.swing.JFrame {
     private void initComponents() {
 
         panelPrincipal = new javax.swing.JPanel();
-        PantallaPedido = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        PantallaPedido = new PanelConFondo("/imagenes/logoMenu.png");
+        lblNuevoProducto = new javax.swing.JLabel();
         btnVolverMenuPedido = new javax.swing.JButton();
-        MenuPrincipal = new javax.swing.JPanel();
+        btnPlatosPrinc = new javax.swing.JButton();
+        btnBebidas = new javax.swing.JButton();
+        btnPostres = new javax.swing.JButton();
+        btnMenu = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaCestaProductos = new javax.swing.JList<>();
+        jLabel2 = new javax.swing.JLabel();
+        btnEliminarProducto = new javax.swing.JButton();
+        btnFinalizarPedido = new javax.swing.JButton();
+        MenuPrincipal = new PanelConFondo("/imagenes/logoMenu.png");
         btnPedir = new javax.swing.JButton();
         btnAdministrador = new javax.swing.JButton();
 
@@ -48,7 +55,10 @@ public class InterfazBurguer extends javax.swing.JFrame {
 
         panelPrincipal.setLayout(new java.awt.CardLayout());
 
-        jLabel1.setText("BIENVENIDO A LA PANTALLA PEDIR.");
+        lblNuevoProducto.setBackground(new java.awt.Color(255, 0, 204));
+        lblNuevoProducto.setFont(new java.awt.Font("Algerian", 1, 24)); // NOI18N
+        lblNuevoProducto.setForeground(new java.awt.Color(0, 102, 0));
+        lblNuevoProducto.setText("nuevo pedido");
 
         btnVolverMenuPedido.setText("Volver al menú");
         btnVolverMenuPedido.addActionListener(new java.awt.event.ActionListener() {
@@ -57,25 +67,84 @@ public class InterfazBurguer extends javax.swing.JFrame {
             }
         });
 
+        btnPlatosPrinc.setText("Platos Principales");
+
+        btnBebidas.setText("Bebidas");
+
+        btnPostres.setText("Postres");
+
+        btnMenu.setText("Menús");
+
+        jScrollPane1.setViewportView(listaCestaProductos);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 204, 255));
+        jLabel2.setText("Resumen Pedido");
+
+        btnEliminarProducto.setText("Eliminar Producto");
+
+        btnFinalizarPedido.setText("Finalizar Pedido");
+
         javax.swing.GroupLayout PantallaPedidoLayout = new javax.swing.GroupLayout(PantallaPedido);
         PantallaPedido.setLayout(PantallaPedidoLayout);
         PantallaPedidoLayout.setHorizontalGroup(
             PantallaPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PantallaPedidoLayout.createSequentialGroup()
-                .addGap(177, 177, 177)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(156, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PantallaPedidoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVolverMenuPedido)
+                .addGroup(PantallaPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PantallaPedidoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(PantallaPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PantallaPedidoLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnVolverMenuPedido))
+                            .addGroup(PantallaPedidoLayout.createSequentialGroup()
+                                .addGroup(PantallaPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PantallaPedidoLayout.createSequentialGroup()
+                                        .addComponent(btnPlatosPrinc, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnBebidas, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(24, 24, 24)
+                                        .addComponent(btnPostres, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(PantallaPedidoLayout.createSequentialGroup()
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(PantallaPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(btnEliminarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnFinalizarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(0, 44, Short.MAX_VALUE))))
+                    .addGroup(PantallaPedidoLayout.createSequentialGroup()
+                        .addGroup(PantallaPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PantallaPedidoLayout.createSequentialGroup()
+                                .addGap(201, 201, 201)
+                                .addComponent(lblNuevoProducto))
+                            .addGroup(PantallaPedidoLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         PantallaPedidoLayout.setVerticalGroup(
             PantallaPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PantallaPedidoLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 437, Short.MAX_VALUE)
+                .addComponent(lblNuevoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addGroup(PantallaPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPlatosPrinc)
+                    .addComponent(btnBebidas)
+                    .addComponent(btnPostres)
+                    .addComponent(btnMenu))
+                .addGap(39, 39, 39)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PantallaPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(PantallaPedidoLayout.createSequentialGroup()
+                        .addComponent(btnEliminarProducto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnFinalizarPedido)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addComponent(btnVolverMenuPedido))
         );
 
@@ -101,14 +170,14 @@ public class InterfazBurguer extends javax.swing.JFrame {
                 .addGroup(MenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnPedir, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addContainerGap(218, Short.MAX_VALUE))
         );
         MenuPrincipalLayout.setVerticalGroup(
             MenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuPrincipalLayout.createSequentialGroup()
                 .addGap(162, 162, 162)
                 .addComponent(btnPedir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
                 .addComponent(btnAdministrador)
                 .addGap(193, 193, 193))
         );
@@ -129,17 +198,17 @@ public class InterfazBurguer extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPedirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedirActionPerformed
-        // TODO add your handling code here:
-        CardLayout c1 = (CardLayout) this.panelPrincipal.getLayout();
-        c1.show(this.panelPrincipal, "cardPantallaPedido");
-    }//GEN-LAST:event_btnPedirActionPerformed
-
     private void btnVolverMenuPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuPedidoActionPerformed
         // TODO add your handling code here:
         CardLayout c1 = (CardLayout) this.panelPrincipal.getLayout();
         c1.show(this.panelPrincipal, "cardMenuPrincipal");
     }//GEN-LAST:event_btnVolverMenuPedidoActionPerformed
+
+    private void btnPedirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedirActionPerformed
+        // TODO add your handling code here:
+        CardLayout c1 = (CardLayout) this.panelPrincipal.getLayout();
+        c1.show(this.panelPrincipal, "cardPantallaPedido");
+    }//GEN-LAST:event_btnPedirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,27 +249,49 @@ public class InterfazBurguer extends javax.swing.JFrame {
     private javax.swing.JPanel MenuPrincipal;
     private javax.swing.JPanel PantallaPedido;
     private javax.swing.JButton btnAdministrador;
+    private javax.swing.JButton btnBebidas;
+    private javax.swing.JButton btnEliminarProducto;
+    private javax.swing.JButton btnFinalizarPedido;
+    private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnPedir;
+    private javax.swing.JButton btnPlatosPrinc;
+    private javax.swing.JButton btnPostres;
     private javax.swing.JButton btnVolverMenuPedido;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblNuevoProducto;
+    private javax.swing.JList<String> listaCestaProductos;
     private javax.swing.JPanel panelPrincipal;
     // End of variables declaration//GEN-END:variables
 
-    class FondoPanel extends JPanel
-    {
-        private Image imagen;
-        
-        @Override
-        public void paint(Graphics g)
-        {
-            imagen = new ImageIcon(getClass().getResource("/Imagenes/logoBurguer.png")).getImage();
-            
-            g.drawImage(imagen,0, 0, getWidth(), getHeight(),this);
-            
-            setOpaque(false);
-            
-            super.paint(g);
+    
+// Este método sirve para poner de fondo una imagen en un JPanel. 
+    public class PanelConFondo extends JPanel {
+    private Image imagen;
+
+  
+   public PanelConFondo(String rutaImagen) {
+        try {
+            // Cargar la imagen desde el classpath
+            java.net.URL resource = getClass().getResource(rutaImagen);
+            if (resource != null) {
+                imagen = new ImageIcon(resource).getImage();
+            } else {
+                System.err.println("Recurso no encontrado: " + rutaImagen);
+            }
+        } catch (Exception ex) {
+            System.err.println("Error al cargar la imagen: " + ex.getMessage());
         }
     }
+
+    
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        // Dibujar la imagen de fondo
+        if (imagen != null) {
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+        }
+    }
+}
 }
 
