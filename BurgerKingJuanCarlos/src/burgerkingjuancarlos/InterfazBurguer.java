@@ -7,6 +7,7 @@ package burgerkingjuancarlos;
 import java.awt.CardLayout;
 import java.awt.Graphics;
 import java.awt.Image;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,7 +21,7 @@ public class InterfazBurguer extends javax.swing.JFrame {
      * Creates new form InterfazBurguer
      */
      Hamburgueseria urjc = new Hamburgueseria();
-     CatalogoProductos catalogo = urjc.getCatalogo();
+     DefaultListModel listaPlatosPrincipales = new DefaultListModel();
     
     public InterfazBurguer() {
         initComponents();
@@ -59,6 +60,7 @@ public class InterfazBurguer extends javax.swing.JFrame {
         infoPlatoAdmin = new javax.swing.JTextArea();
         jLabel11 = new javax.swing.JLabel();
         btnVolverPlatosPrincipales = new javax.swing.JButton();
+        lblFotoPlatoPrincipal = new javax.swing.JLabel();
         ProductosAdministrador = new javax.swing.JPanel();
         lblTituloProductos = new javax.swing.JLabel();
         btnPlatosPrincipales = new javax.swing.JButton();
@@ -101,18 +103,29 @@ public class InterfazBurguer extends javax.swing.JFrame {
         lblTituloPlatosPrincipales.setFont(new java.awt.Font("Bernard MT Condensed", 2, 24)); // NOI18N
         lblTituloPlatosPrincipales.setText("Platos Principales");
 
-        listaPlatosPrincipalesAdmin.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        listaPlatosPrincipalesAdmin.setModel(listaPlatosPrincipales);
+        listaPlatosPrincipalesAdmin.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaPlatosPrincipalesAdminValueChanged(evt);
+            }
         });
         jScrollPane2.setViewportView(listaPlatosPrincipalesAdmin);
 
         jLabel3.setText("Lista de Platos Principales");
 
         btnEliminarPlato.setText("Eliminar producto seleccionado");
+        btnEliminarPlato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarPlatoActionPerformed(evt);
+            }
+        });
 
         btnAnadirProducto.setText("Añadir/Modificar");
+        btnAnadirProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnadirProductoActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Añadir/Modificar Productos");
 
@@ -133,54 +146,57 @@ public class InterfazBurguer extends javax.swing.JFrame {
         jLabel11.setText("Información del producto");
 
         btnVolverPlatosPrincipales.setText("Volver");
+        btnVolverPlatosPrincipales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverPlatosPrincipalesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PlatosPrincipalesAdminLayout = new javax.swing.GroupLayout(PlatosPrincipalesAdmin);
         PlatosPrincipalesAdmin.setLayout(PlatosPrincipalesAdminLayout);
         PlatosPrincipalesAdminLayout.setHorizontalGroup(
             PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
-                .addGap(205, 205, 205)
-                .addComponent(lblTituloPlatosPrincipales, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
-                        .addGroup(PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEliminarPlato))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
-                        .addGroup(PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE))
-                    .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PlatosPrincipalesAdminLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNombrePlato, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtImagenPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPrecioPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9)
-                            .addComponent(txtTiempoPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(68, 68, 68))
-                    .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addGroup(PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAnadirProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(54, 54, 54))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PlatosPrincipalesAdminLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVolverPlatosPrincipales))
+            .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
+                .addGroup(PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminarPlato)
+                            .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
+                                .addGroup(PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(lblFotoPlatoPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
+                        .addGap(205, 205, 205)
+                        .addComponent(lblTituloPlatosPrincipales, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtImagenPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtNombrePlato, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrecioPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)
+                            .addComponent(txtTiempoPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(116, 116, 116))
+                    .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAnadirProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31))))
         );
         PlatosPrincipalesAdminLayout.setVerticalGroup(
             PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,9 +212,12 @@ public class InterfazBurguer extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel11)
                         .addGap(1, 1, 1)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEliminarPlato))
+                        .addGroup(PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnEliminarPlato))
+                            .addComponent(lblFotoPlatoPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -209,18 +228,18 @@ public class InterfazBurguer extends javax.swing.JFrame {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtImagenPlato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtPrecioPlato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTiempoPlato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
+                        .addGap(18, 18, 18)
                         .addComponent(btnAnadirProducto))
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(btnVolverPlatosPrincipales)
                 .addContainerGap())
         );
@@ -289,7 +308,7 @@ public class InterfazBurguer extends javax.swing.JFrame {
                 .addComponent(btnPostresProductos)
                 .addGap(28, 28, 28)
                 .addComponent(btnMenusProductos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
                 .addComponent(btnVolverProductos)
                 .addContainerGap())
         );
@@ -618,9 +637,77 @@ public class InterfazBurguer extends javax.swing.JFrame {
 
     private void btnPlatosPrincipalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlatosPrincipalesActionPerformed
         // TODO add your handling code here:
+        //Cargo la lista de productos y cambio de pantalla.
+        this.listaPlatosPrincipales.removeAllElements();
+        CatalogoProductos catalogo = urjc.getCatalogo();
+        for (Principal plato: catalogo.getPlatosPrincipales()){
+            listaPlatosPrincipales.addElement(plato.getNombre());
+        }
         CardLayout c1 = (CardLayout) this.panelPrincipal.getLayout();
         c1.show(this.panelPrincipal, "cardPlatosPrincipalesAdmin");
+        
     }//GEN-LAST:event_btnPlatosPrincipalesActionPerformed
+
+    private void btnEliminarPlatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPlatoActionPerformed
+        // TODO add your handling code here:
+        //Aquí, cojo el catálogo de productos.
+        CatalogoProductos catalogo = urjc.getCatalogo();
+        //Busco el elemento seleccionado: 
+        String nombreEliminar = this.listaPlatosPrincipalesAdmin.getSelectedValue();
+        //Un método que, dado el nombre de un producto, lo elimine del catálogo.
+        Producto productoEliminar = catalogo.buscarProducto(nombreEliminar);
+        catalogo.eliminarProducto(productoEliminar);
+        //Una vez eliminado, elimino el elemento de la lista. 
+        listaPlatosPrincipales.removeElement(nombreEliminar);
+        
+        
+    }//GEN-LAST:event_btnEliminarPlatoActionPerformed
+
+    private void btnAnadirProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirProductoActionPerformed
+        // TODO add your handling code here:
+        
+        //Voy a coger los elementos, los cargo en un objeto de la clase Principal, lo añado al catálogo, y muestro el catálogo.
+        
+        String nombrePlato = this.txtNombrePlato.getText();
+        String imagenPlato = this.txtImagenPlato.getText();
+        int precio = Integer.parseInt(this.txtPrecioPlato.getText());
+        int tiempo = Integer.parseInt(this.txtTiempoPlato.getText());
+        
+        //Ahora creo el producto. 
+        Producto plato = new Principal(nombrePlato, imagenPlato, precio, tiempo); 
+        //Cargo el catálogo y lo añado: 
+        CatalogoProductos catalogo = urjc.getCatalogo();
+        catalogo.agregarProducto(plato);
+        //Lo añado a la lista: 
+        this.listaPlatosPrincipales.addElement(nombrePlato);
+    }//GEN-LAST:event_btnAnadirProductoActionPerformed
+
+    private void btnVolverPlatosPrincipalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverPlatosPrincipalesActionPerformed
+        // TODO add your handling code here:
+        CardLayout c1 = (CardLayout) this.panelPrincipal.getLayout();
+        c1.show(this.panelPrincipal, "cardProductosAdministrador");
+    }//GEN-LAST:event_btnVolverPlatosPrincipalesActionPerformed
+
+    private void listaPlatosPrincipalesAdminValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaPlatosPrincipalesAdminValueChanged
+        // TODO add your handling code here:
+        //Quiero que, si lo seleccionas, en el frame de abajo salgan sus datos. Para ello: 
+        if (!this.listaPlatosPrincipales.isEmpty()){
+             String elementoSeleccionado = this.listaPlatosPrincipalesAdmin.getSelectedValue();
+            //Ahora, busco el producto en el catálogo: 
+            CatalogoProductos catalogo = urjc.getCatalogo();
+            Producto producto = catalogo.buscarProducto(elementoSeleccionado);
+            // Una vez encontrado, cargo su info: 
+            this.infoPlatoAdmin.setText(producto.toString());
+            //Cargo su foto. 
+            String ruta = "/imagenes/"+producto.getImagen();
+            ImageIcon imagen = new ImageIcon(getClass().getResource(ruta)); 
+            this.lblFotoPlatoPrincipal.setIcon(imagen);
+        }else{
+            this.infoPlatoAdmin.setText("NO hay platos principales en el catálogo.");
+            this.lblFotoPlatoPrincipal.setIcon(null);
+        }
+       
+    }//GEN-LAST:event_listaPlatosPrincipalesAdminValueChanged
 
     /**
      * @param args the command line arguments
@@ -703,6 +790,7 @@ public class InterfazBurguer extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblContraseña;
+    private javax.swing.JLabel lblFotoPlatoPrincipal;
     private javax.swing.JLabel lblNuevoProducto;
     private javax.swing.JLabel lblTituloPlatosPrincipales;
     private javax.swing.JLabel lblTituloProductos;

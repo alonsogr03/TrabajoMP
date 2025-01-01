@@ -5,6 +5,7 @@
 package burgerkingjuancarlos;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class CatalogoProductos {
@@ -12,6 +13,21 @@ public class CatalogoProductos {
 
     public CatalogoProductos() {
         this.productos = new ArrayList<>();
+    }
+    
+    public Producto buscarProducto(String nombre){
+        Producto resultado = null;
+        Iterator <Producto> it = this.productos.iterator();
+        boolean encontrado = false;
+        while (it.hasNext() && !encontrado){
+            resultado=it.next();
+            if (nombre.equals(resultado.getNombre())){
+                return resultado;
+            }  
+        }
+       return resultado;
+        
+        
     }
 
     public ArrayList<Principal> getPlatosPrincipales(){

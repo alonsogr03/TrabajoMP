@@ -32,6 +32,9 @@ public abstract class Producto {
     public int getTiempoElaboracion() {
         return tiempoElaboracion;
     }
+    public void setTiempoElabocion(int tiempo){
+        this.tiempoElaboracion = tiempo;
+    }
 
     @Override
     public String toString() {
