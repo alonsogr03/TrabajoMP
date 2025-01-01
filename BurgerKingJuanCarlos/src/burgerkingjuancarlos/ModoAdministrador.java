@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public interface ModoAdministrador {
 // Declaración de las listas necesarias para administrar productos y pedidos
     ArrayList<Producto> Catalogo = new ArrayList<>();
- 
+    String contraseña="12345";
     ArrayList<Ticket> ticketpedidos = new ArrayList<>();
 
     // Métodos relacionados con backups

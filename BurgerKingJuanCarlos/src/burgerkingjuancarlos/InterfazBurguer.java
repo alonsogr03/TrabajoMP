@@ -8,6 +8,7 @@ import java.awt.CardLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -18,8 +19,10 @@ public class InterfazBurguer extends javax.swing.JFrame {
     /**
      * Creates new form InterfazBurguer
      */
+     Hamburgueseria urjc = new Hamburgueseria();
+     CatalogoProductos catalogo = urjc.getCatalogo();
+    
     public InterfazBurguer() {
-        //FondoPanel fondo = new FondoPanel();
         initComponents();
          CardLayout c1 = (CardLayout) this.panelPrincipal.getLayout();
          c1.show(this.panelPrincipal, "cardMenuPrincipal");
@@ -35,6 +38,46 @@ public class InterfazBurguer extends javax.swing.JFrame {
     private void initComponents() {
 
         panelPrincipal = new javax.swing.JPanel();
+        PlatosPrincipalesAdmin = new javax.swing.JPanel();
+        lblTituloPlatosPrincipales = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listaPlatosPrincipalesAdmin = new javax.swing.JList<>();
+        jLabel3 = new javax.swing.JLabel();
+        btnEliminarPlato = new javax.swing.JButton();
+        btnAnadirProducto = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtNombrePlato = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtImagenPlato = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtPrecioPlato = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txtTiempoPlato = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        infoPlatoAdmin = new javax.swing.JTextArea();
+        jLabel11 = new javax.swing.JLabel();
+        btnVolverPlatosPrincipales = new javax.swing.JButton();
+        ProductosAdministrador = new javax.swing.JPanel();
+        lblTituloProductos = new javax.swing.JLabel();
+        btnPlatosPrincipales = new javax.swing.JButton();
+        btnBebidasProductos = new javax.swing.JButton();
+        btnPostresProductos = new javax.swing.JButton();
+        btnMenusProductos = new javax.swing.JButton();
+        btnVolverProductos = new javax.swing.JButton();
+        Administrador = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        btnVolverAdministrador = new javax.swing.JButton();
+        btnProductos = new javax.swing.JButton();
+        btnVentas = new javax.swing.JButton();
+        btnCopiaSeguridad = new javax.swing.JButton();
+        btnRestaurarDatos = new javax.swing.JButton();
+        InicioSesion = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        passwordAdministrador = new javax.swing.JPasswordField();
+        lblContraseña = new javax.swing.JLabel();
+        btnEntrarAdmin = new javax.swing.JButton();
         PantallaPedido = new PanelConFondo("/imagenes/logoMenu.png");
         lblNuevoProducto = new javax.swing.JLabel();
         btnVolverMenuPedido = new javax.swing.JButton();
@@ -54,6 +97,315 @@ public class InterfazBurguer extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         panelPrincipal.setLayout(new java.awt.CardLayout());
+
+        lblTituloPlatosPrincipales.setFont(new java.awt.Font("Bernard MT Condensed", 2, 24)); // NOI18N
+        lblTituloPlatosPrincipales.setText("Platos Principales");
+
+        listaPlatosPrincipalesAdmin.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(listaPlatosPrincipalesAdmin);
+
+        jLabel3.setText("Lista de Platos Principales");
+
+        btnEliminarPlato.setText("Eliminar producto seleccionado");
+
+        btnAnadirProducto.setText("Añadir/Modificar");
+
+        jLabel5.setText("Añadir/Modificar Productos");
+
+        jLabel6.setText("Nombre");
+
+        jLabel7.setText("Imagen");
+
+        jLabel8.setText("Precio");
+
+        jLabel9.setText("Tiempo Elaboración");
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        infoPlatoAdmin.setColumns(20);
+        infoPlatoAdmin.setRows(5);
+        jScrollPane3.setViewportView(infoPlatoAdmin);
+
+        jLabel11.setText("Información del producto");
+
+        btnVolverPlatosPrincipales.setText("Volver");
+
+        javax.swing.GroupLayout PlatosPrincipalesAdminLayout = new javax.swing.GroupLayout(PlatosPrincipalesAdmin);
+        PlatosPrincipalesAdmin.setLayout(PlatosPrincipalesAdminLayout);
+        PlatosPrincipalesAdminLayout.setHorizontalGroup(
+            PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
+                .addGap(205, 205, 205)
+                .addComponent(lblTituloPlatosPrincipales, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
+                        .addGroup(PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminarPlato))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
+                        .addGroup(PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE))
+                    .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PlatosPrincipalesAdminLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombrePlato, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtImagenPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrecioPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)
+                            .addComponent(txtTiempoPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(68, 68, 68))
+                    .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addGroup(PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnAnadirProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(54, 54, 54))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PlatosPrincipalesAdminLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVolverPlatosPrincipales))
+        );
+        PlatosPrincipalesAdminLayout.setVerticalGroup(
+            PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTituloPlatosPrincipales)
+                .addGap(18, 18, 18)
+                .addGroup(PlatosPrincipalesAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel11)
+                        .addGap(1, 1, 1)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEliminarPlato))
+                    .addGroup(PlatosPrincipalesAdminLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNombrePlato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtImagenPlato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPrecioPlato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTiempoPlato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(btnAnadirProducto))
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(btnVolverPlatosPrincipales)
+                .addContainerGap())
+        );
+
+        panelPrincipal.add(PlatosPrincipalesAdmin, "cardPlatosPrincipalesAdmin");
+
+        lblTituloProductos.setFont(new java.awt.Font("Bernard MT Condensed", 2, 24)); // NOI18N
+        lblTituloProductos.setText("PRODUCTOS");
+
+        btnPlatosPrincipales.setText("Platos Principales");
+        btnPlatosPrincipales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlatosPrincipalesActionPerformed(evt);
+            }
+        });
+
+        btnBebidasProductos.setText("Bebidas");
+        btnBebidasProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBebidasProductosActionPerformed(evt);
+            }
+        });
+
+        btnPostresProductos.setText("Postres");
+
+        btnMenusProductos.setText("Menús");
+
+        btnVolverProductos.setText("Volver");
+        btnVolverProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverProductosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ProductosAdministradorLayout = new javax.swing.GroupLayout(ProductosAdministrador);
+        ProductosAdministrador.setLayout(ProductosAdministradorLayout);
+        ProductosAdministradorLayout.setHorizontalGroup(
+            ProductosAdministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ProductosAdministradorLayout.createSequentialGroup()
+                .addContainerGap(232, Short.MAX_VALUE)
+                .addGroup(ProductosAdministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(ProductosAdministradorLayout.createSequentialGroup()
+                        .addComponent(lblTituloProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ProductosAdministradorLayout.createSequentialGroup()
+                        .addGroup(ProductosAdministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnBebidasProductos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnPlatosPrincipales, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnPostresProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnMenusProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(247, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ProductosAdministradorLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVolverProductos)
+                .addContainerGap())
+        );
+        ProductosAdministradorLayout.setVerticalGroup(
+            ProductosAdministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ProductosAdministradorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTituloProductos)
+                .addGap(69, 69, 69)
+                .addComponent(btnPlatosPrincipales)
+                .addGap(26, 26, 26)
+                .addComponent(btnBebidasProductos)
+                .addGap(27, 27, 27)
+                .addComponent(btnPostresProductos)
+                .addGap(28, 28, 28)
+                .addComponent(btnMenusProductos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+                .addComponent(btnVolverProductos)
+                .addContainerGap())
+        );
+
+        panelPrincipal.add(ProductosAdministrador, "cardProductosAdministrador");
+
+        jLabel4.setFont(new java.awt.Font("Bernard MT Condensed", 2, 24)); // NOI18N
+        jLabel4.setText("ADMINISTRADOR");
+
+        btnVolverAdministrador.setText("Volver");
+        btnVolverAdministrador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverAdministradorActionPerformed(evt);
+            }
+        });
+
+        btnProductos.setText("Productos");
+        btnProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProductosActionPerformed(evt);
+            }
+        });
+
+        btnVentas.setText("Ventas");
+
+        btnCopiaSeguridad.setText("Copia de seguridad");
+
+        btnRestaurarDatos.setText("Restaurar datos");
+
+        javax.swing.GroupLayout AdministradorLayout = new javax.swing.GroupLayout(Administrador);
+        Administrador.setLayout(AdministradorLayout);
+        AdministradorLayout.setHorizontalGroup(
+            AdministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdministradorLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVolverAdministrador)
+                .addContainerGap())
+            .addGroup(AdministradorLayout.createSequentialGroup()
+                .addGap(233, 233, 233)
+                .addGroup(AdministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                    .addComponent(btnProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCopiaSeguridad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRestaurarDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(209, Short.MAX_VALUE))
+        );
+        AdministradorLayout.setVerticalGroup(
+            AdministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AdministradorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addGap(99, 99, 99)
+                .addComponent(btnProductos)
+                .addGap(18, 18, 18)
+                .addComponent(btnVentas)
+                .addGap(18, 18, 18)
+                .addComponent(btnCopiaSeguridad)
+                .addGap(18, 18, 18)
+                .addComponent(btnRestaurarDatos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
+                .addComponent(btnVolverAdministrador))
+        );
+
+        panelPrincipal.add(Administrador, "cardAdministrador");
+
+        InicioSesion.setBackground(new java.awt.Color(0, 204, 204));
+        InicioSesion.setForeground(new java.awt.Color(0, 204, 204));
+
+        jLabel1.setFont(new java.awt.Font("Bernard MT Condensed", 3, 24)); // NOI18N
+        jLabel1.setText("Inicio de sesión");
+
+        passwordAdministrador.setText("jPasswordField1");
+
+        lblContraseña.setText("Indique la contraseña.");
+
+        btnEntrarAdmin.setText("Entrar");
+        btnEntrarAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarAdminActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout InicioSesionLayout = new javax.swing.GroupLayout(InicioSesion);
+        InicioSesion.setLayout(InicioSesionLayout);
+        InicioSesionLayout.setHorizontalGroup(
+            InicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(InicioSesionLayout.createSequentialGroup()
+                .addGroup(InicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(InicioSesionLayout.createSequentialGroup()
+                        .addGap(219, 219, 219)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(InicioSesionLayout.createSequentialGroup()
+                        .addGap(155, 155, 155)
+                        .addGroup(InicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnEntrarAdmin)
+                            .addGroup(InicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(passwordAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(190, Short.MAX_VALUE))
+        );
+        InicioSesionLayout.setVerticalGroup(
+            InicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(InicioSesionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(87, 87, 87)
+                .addComponent(lblContraseña)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(passwordAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(btnEntrarAdmin)
+                .addContainerGap(267, Short.MAX_VALUE))
+        );
+
+        panelPrincipal.add(InicioSesion, "cardInicioSesion");
 
         lblNuevoProducto.setBackground(new java.awt.Color(255, 0, 204));
         lblNuevoProducto.setFont(new java.awt.Font("Algerian", 1, 24)); // NOI18N
@@ -162,6 +514,11 @@ public class InterfazBurguer extends javax.swing.JFrame {
         });
 
         btnAdministrador.setText("Administrador");
+        btnAdministrador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdministradorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout MenuPrincipalLayout = new javax.swing.GroupLayout(MenuPrincipal);
         MenuPrincipal.setLayout(MenuPrincipalLayout);
@@ -177,9 +534,9 @@ public class InterfazBurguer extends javax.swing.JFrame {
         MenuPrincipalLayout.setVerticalGroup(
             MenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuPrincipalLayout.createSequentialGroup()
-                .addGap(162, 162, 162)
+                .addContainerGap(162, Short.MAX_VALUE)
                 .addComponent(btnPedir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addGap(101, 101, 101)
                 .addComponent(btnAdministrador)
                 .addGap(193, 193, 193))
         );
@@ -211,6 +568,59 @@ public class InterfazBurguer extends javax.swing.JFrame {
         CardLayout c1 = (CardLayout) this.panelPrincipal.getLayout();
         c1.show(this.panelPrincipal, "cardPantallaPedido");
     }//GEN-LAST:event_btnPedirActionPerformed
+
+    private void btnEntrarAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarAdminActionPerformed
+        // Compruebo si la contraseña es correcta: 
+        if (this.passwordAdministrador.getText().equals(ModoAdministrador.contraseña)){
+            //Si es igual, paso de panel: 
+            CardLayout c1 = (CardLayout) this.panelPrincipal.getLayout();
+            c1.show(this.panelPrincipal, "cardAdministrador");
+            
+        }else{
+            // Mostrar pantalla emergente con JOptionPane
+                JOptionPane.showMessageDialog(null, 
+                "Contraseña Incorrecta", 
+                "Pruebe otra vez.", 
+                JOptionPane.ERROR_MESSAGE);
+     
+        }
+        
+        
+    }//GEN-LAST:event_btnEntrarAdminActionPerformed
+
+    private void btnAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministradorActionPerformed
+        // TODO add your handling code here:
+        CardLayout c1 = (CardLayout) this.panelPrincipal.getLayout();
+            c1.show(this.panelPrincipal, "cardInicioSesion");
+    }//GEN-LAST:event_btnAdministradorActionPerformed
+
+    private void btnVolverAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverAdministradorActionPerformed
+        // TODO add your handling code here:
+        CardLayout c1 = (CardLayout) this.panelPrincipal.getLayout();
+            c1.show(this.panelPrincipal, "cardMenuPrincipal");
+    }//GEN-LAST:event_btnVolverAdministradorActionPerformed
+
+    private void btnBebidasProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBebidasProductosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBebidasProductosActionPerformed
+
+    private void btnVolverProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverProductosActionPerformed
+        // TODO add your handling code here:
+        CardLayout c1 = (CardLayout) this.panelPrincipal.getLayout();
+        c1.show(this.panelPrincipal, "cardAdministrador");
+    }//GEN-LAST:event_btnVolverProductosActionPerformed
+
+    private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
+        // TODO add your handling code here:
+        CardLayout c1 = (CardLayout) this.panelPrincipal.getLayout();
+        c1.show(this.panelPrincipal, "cardProductosAdministrador");
+    }//GEN-LAST:event_btnProductosActionPerformed
+
+    private void btnPlatosPrincipalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlatosPrincipalesActionPerformed
+        // TODO add your handling code here:
+        CardLayout c1 = (CardLayout) this.panelPrincipal.getLayout();
+        c1.show(this.panelPrincipal, "cardPlatosPrincipalesAdmin");
+    }//GEN-LAST:event_btnPlatosPrincipalesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,22 +658,62 @@ public class InterfazBurguer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Administrador;
+    private javax.swing.JPanel InicioSesion;
     private javax.swing.JPanel MenuPrincipal;
     private javax.swing.JPanel PantallaPedido;
+    private javax.swing.JPanel PlatosPrincipalesAdmin;
+    private javax.swing.JPanel ProductosAdministrador;
     private javax.swing.JButton btnAdministrador;
+    private javax.swing.JButton btnAnadirProducto;
     private javax.swing.JButton btnBebidas;
+    private javax.swing.JButton btnBebidasProductos;
+    private javax.swing.JButton btnCopiaSeguridad;
+    private javax.swing.JButton btnEliminarPlato;
     private javax.swing.JButton btnEliminarProducto;
+    private javax.swing.JButton btnEntrarAdmin;
     private javax.swing.JButton btnFinalizarPedido;
     private javax.swing.JButton btnMenu;
+    private javax.swing.JButton btnMenusProductos;
     private javax.swing.JButton btnPedir;
     private javax.swing.JButton btnPlatosPrinc;
+    private javax.swing.JButton btnPlatosPrincipales;
     private javax.swing.JButton btnPostres;
+    private javax.swing.JButton btnPostresProductos;
+    private javax.swing.JButton btnProductos;
+    private javax.swing.JButton btnRestaurarDatos;
+    private javax.swing.JButton btnVentas;
+    private javax.swing.JButton btnVolverAdministrador;
     private javax.swing.JButton btnVolverMenuPedido;
+    private javax.swing.JButton btnVolverPlatosPrincipales;
+    private javax.swing.JButton btnVolverProductos;
+    private javax.swing.JTextArea infoPlatoAdmin;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblContraseña;
     private javax.swing.JLabel lblNuevoProducto;
+    private javax.swing.JLabel lblTituloPlatosPrincipales;
+    private javax.swing.JLabel lblTituloProductos;
     private javax.swing.JList<String> listaCestaProductos;
+    private javax.swing.JList<String> listaPlatosPrincipalesAdmin;
     private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JPasswordField passwordAdministrador;
+    private javax.swing.JTextField txtImagenPlato;
+    private javax.swing.JTextField txtNombrePlato;
+    private javax.swing.JTextField txtPrecioPlato;
+    private javax.swing.JTextField txtTiempoPlato;
     // End of variables declaration//GEN-END:variables
 
     

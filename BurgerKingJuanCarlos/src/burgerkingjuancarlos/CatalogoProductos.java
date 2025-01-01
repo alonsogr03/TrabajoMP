@@ -14,6 +14,15 @@ public class CatalogoProductos {
         this.productos = new ArrayList<>();
     }
 
+    public ArrayList<Principal> getPlatosPrincipales(){
+        ArrayList<Principal> platos = new ArrayList<>();
+        for (Producto producto:productos){
+            if(producto instanceof Principal){
+                platos.add((Principal) producto);
+            }
+        }
+        return platos;
+    }
     public void agregarProducto(Producto producto) {
         productos.add(producto);
     }
