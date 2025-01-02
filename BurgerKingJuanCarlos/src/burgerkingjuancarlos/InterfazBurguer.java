@@ -46,10 +46,10 @@ public class InterfazBurguer extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jButton1 = new javax.swing.JButton();
+        listaMenusAdmin = new javax.swing.JList<>();
+        btnVerInfoMenus = new javax.swing.JButton();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtInfoMenusAdmin = new javax.swing.JTextArea();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
@@ -58,12 +58,12 @@ public class InterfazBurguer extends javax.swing.JFrame {
         listaBebidasMenu = new javax.swing.JList<>();
         jScrollPane12 = new javax.swing.JScrollPane();
         listaPostreMenu = new javax.swing.JList<>();
-        jButton2 = new javax.swing.JButton();
+        btnAñadirMenu = new javax.swing.JButton();
         jLabel33 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNombreMenu = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        txtImagenMenu = new javax.swing.JTextField();
+        btnVolverMenuAdmin = new javax.swing.JButton();
         PostresAdmin = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -180,18 +180,14 @@ public class InterfazBurguer extends javax.swing.JFrame {
 
         jLabel30.setText("Listado de menús:");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane8.setViewportView(jList1);
+        listaMenusAdmin.setModel(listaMenus);
+        jScrollPane8.setViewportView(listaMenusAdmin);
 
-        jButton1.setText("Ver informacion");
+        btnVerInfoMenus.setText("Ver informacion");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane9.setViewportView(jTextArea1);
+        txtInfoMenusAdmin.setColumns(20);
+        txtInfoMenusAdmin.setRows(5);
+        jScrollPane9.setViewportView(txtInfoMenusAdmin);
 
         jLabel32.setText("Crear/Modificar Menú.");
 
@@ -204,13 +200,13 @@ public class InterfazBurguer extends javax.swing.JFrame {
         listaPostreMenu.setModel(listaPostres);
         jScrollPane12.setViewportView(listaPostreMenu);
 
-        jButton2.setText("Añadir/Modificar Menú");
+        btnAñadirMenu.setText("Añadir/Modificar Menú");
 
         jLabel33.setText("Nombre");
 
         jLabel34.setText("Imagen");
 
-        jButton3.setText("Volver");
+        btnVolverMenuAdmin.setText("Volver");
 
         javax.swing.GroupLayout PlatoMenuAdminLayout = new javax.swing.GroupLayout(PlatoMenuAdmin);
         PlatoMenuAdmin.setLayout(PlatoMenuAdminLayout);
@@ -225,20 +221,19 @@ public class InterfazBurguer extends javax.swing.JFrame {
                     .addGroup(PlatoMenuAdminLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(PlatoMenuAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                            .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PlatoMenuAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
+                            .addComponent(btnVerInfoMenus)
                             .addGroup(PlatoMenuAdminLayout.createSequentialGroup()
                                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(PlatoMenuAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(PlatoMenuAdminLayout.createSequentialGroup()
-                                        .addComponent(jButton2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                                        .addComponent(jButton3))))))
+                                        .addGap(0, 159, Short.MAX_VALUE)
+                                        .addComponent(btnVolverMenuAdmin))))))
                     .addGroup(PlatoMenuAdminLayout.createSequentialGroup()
                         .addGap(228, 228, 228)
                         .addComponent(jLabel32))
@@ -251,10 +246,11 @@ public class InterfazBurguer extends javax.swing.JFrame {
                         .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(PlatoMenuAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
+                            .addComponent(txtNombreMenu)
                             .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnAñadirMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtImagenMenu))))
                 .addGap(14, 14, 14))
         );
         PlatoMenuAdminLayout.setVerticalGroup(
@@ -267,7 +263,7 @@ public class InterfazBurguer extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PlatoMenuAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PlatoMenuAdminLayout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnVerInfoMenus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PlatoMenuAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -277,22 +273,25 @@ public class InterfazBurguer extends javax.swing.JFrame {
                 .addComponent(jLabel32)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PlatoMenuAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PlatoMenuAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(PlatoMenuAdminLayout.createSequentialGroup()
-                            .addComponent(jLabel33)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel34)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addGroup(PlatoMenuAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addGroup(PlatoMenuAdminLayout.createSequentialGroup()
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                        .addComponent(btnVolverMenuAdmin))
+                    .addGroup(PlatoMenuAdminLayout.createSequentialGroup()
+                        .addGroup(PlatoMenuAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PlatoMenuAdminLayout.createSequentialGroup()
+                                .addComponent(jLabel33)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNombreMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel34)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtImagenMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAñadirMenu)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1581,6 +1580,7 @@ public class InterfazBurguer extends javax.swing.JFrame {
     private javax.swing.JButton btnAdministrador;
     private javax.swing.JButton btnAnadirBebidaAdmin;
     private javax.swing.JButton btnAnadirProducto;
+    private javax.swing.JButton btnAñadirMenu;
     private javax.swing.JButton btnAñadirPostresAdmin;
     private javax.swing.JButton btnBebidas;
     private javax.swing.JButton btnBebidasProductos;
@@ -1604,8 +1604,10 @@ public class InterfazBurguer extends javax.swing.JFrame {
     private javax.swing.JButton btnRestaurarDatos;
     private javax.swing.JButton btnVentas;
     private javax.swing.JButton btnVerInfoBebidasAdmin;
+    private javax.swing.JButton btnVerInfoMenus;
     private javax.swing.JButton btnVolverAdministrador;
     private javax.swing.JButton btnVolverBebidasAdmin;
+    private javax.swing.JButton btnVolverMenuAdmin;
     private javax.swing.JButton btnVolverMenuPedido;
     private javax.swing.JButton btnVolverPlatosPrincipales;
     private javax.swing.JButton btnVolverPostresAdmin;
@@ -1614,9 +1616,6 @@ public class InterfazBurguer extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboCantidadPostre;
     private javax.swing.JLabel imagenPostreAdmin;
     private javax.swing.JTextArea infoPlatoAdmin;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1651,7 +1650,6 @@ public class InterfazBurguer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
@@ -1666,9 +1664,6 @@ public class InterfazBurguer extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblContraseña;
     private javax.swing.JLabel lblFotoPlatoPrincipal;
     private javax.swing.JLabel lblImagenBebidaAdmin;
@@ -1678,6 +1673,7 @@ public class InterfazBurguer extends javax.swing.JFrame {
     private javax.swing.JList<String> listaBebidasAdmin;
     private javax.swing.JList<String> listaBebidasMenu;
     private javax.swing.JList<String> listaCestaProductos;
+    private javax.swing.JList<String> listaMenusAdmin;
     private javax.swing.JList<String> listaPlatosPrincipalesAdmin;
     private javax.swing.JList<String> listaPlatosPrincipalesMenu;
     private javax.swing.JList<String> listaPostreMenu;
@@ -1685,11 +1681,14 @@ public class InterfazBurguer extends javax.swing.JFrame {
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JPasswordField passwordAdministrador;
     private javax.swing.JTextField txtImagenBebida;
+    private javax.swing.JTextField txtImagenMenu;
     private javax.swing.JTextField txtImagenPlato;
     private javax.swing.JTextField txtImagenPostre;
     private javax.swing.JTextArea txtInfoBebidasAdmin;
+    private javax.swing.JTextArea txtInfoMenusAdmin;
     private javax.swing.JTextArea txtInfoPostresAdmin;
     private javax.swing.JTextField txtNombreBebida;
+    private javax.swing.JTextField txtNombreMenu;
     private javax.swing.JTextField txtNombrePlato;
     private javax.swing.JTextField txtNombrePostre;
     private javax.swing.JTextField txtPrecioBebida;
