@@ -11,7 +11,7 @@ public class BurgerKingJuanCarlos implements ModoAdministrador {
 
         // Crear productos
         Producto hamburguesa = new Principal("Hamburguesa", "imagen1.jpg", 500, 300);
-        Producto refresco = new Bebida("Refresco", "imagen2.jpg", 200, 60, 500);
+        Producto refresco = new Bebida("Refresco", "imagen2.jpg", 200, 60, Tamanyo.MEDIANO);
         Producto postre = new Postre("Helado", "imagen3.jpg", 300, 120, Tamanyo.MEDIANO);
 
         // Añadir productos
