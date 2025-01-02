@@ -28,7 +28,12 @@ public abstract class Producto {
     public int getPrecio() {
         return precio;
     }
-
+    public void setImagen(String imagen){
+        this.imagen = imagen;
+    }
+    public void setPrecio(int precio){
+        this.precio=precio;
+    }
     public int getTiempoElaboracion() {
         return tiempoElaboracion;
     }
@@ -38,9 +43,8 @@ public abstract class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" +
-                "nombre='" + nombre + '\'' +
-                ", precio=" + precio +
-                ", tiempoElaboracion=" + tiempoElaboracion + " segundos}";
+        return "Nombre= " + nombre + ",\n" +
+               "Precio=" + precio + ",\n" +
+               "Tiempo elaboracion=" + tiempoElaboracion + " segundos\n";
     }
 }

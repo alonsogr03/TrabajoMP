@@ -14,7 +14,6 @@ public class CatalogoProductos {
     public CatalogoProductos() {
         this.productos = new ArrayList<>();
     }
-    
     public Producto buscarProducto(String nombre){
         Producto resultado = null;
         Iterator <Producto> it = this.productos.iterator();
@@ -23,11 +22,14 @@ public class CatalogoProductos {
             resultado=it.next();
             if (nombre.equals(resultado.getNombre())){
                 return resultado;
+                
             }  
         }
-       return resultado;
-        
-        
+       if(encontrado == false){
+           return null;
+       }else{
+           return resultado;
+       }
     }
 
     public ArrayList<Principal> getPlatosPrincipales(){
@@ -55,9 +57,7 @@ public class CatalogoProductos {
         this.productos = productos;
     }
    
-    public int tamañoCatalogo(ArrayList<Producto> productos){
-        int tamañoCatalogo=0;
-       //añadir algo que cuente la longitud del catalogo y te lo devuelva
-        return 0;
+    public int tamañoCatalogo(){
+        return productos.size();
     }
 }

@@ -10,5 +10,8 @@ public class Principal extends Producto {
         super(nombre, imagen, precio, tiempoElaboracion);
     }
    
+    public String toString(){
+        return "Plato Principal: \n" +super.toString();
+    }
    
 }
