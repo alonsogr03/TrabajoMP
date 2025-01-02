@@ -14,6 +14,42 @@ public class CatalogoProductos {
     public CatalogoProductos() {
         this.productos = new ArrayList<>();
     }
+    public Bebida buscarBebida(String nombre){
+        Bebida resultado = null;
+        ArrayList<Bebida> bebidas = this.getBebidas();
+        Iterator <Bebida> it = bebidas.iterator();
+        boolean encontrado = false;
+        while (it.hasNext() && !encontrado){
+            resultado=it.next();
+            if (nombre.equals(resultado.getNombre())){
+                return resultado;
+                
+            }  
+        }
+       if(encontrado == false){
+           return null;
+       }else{
+           return resultado;
+       }
+    }
+    public Postre buscarPostre(String nombre){
+        Postre resultado = null;
+        ArrayList<Postre> postre = this.getPostres();
+        Iterator <Postre> it = postre.iterator();
+        boolean encontrado = false;
+        while (it.hasNext() && !encontrado){
+            resultado=it.next();
+            if (nombre.equals(resultado.getNombre())){
+                return resultado;
+                
+            }  
+        }
+       if(encontrado == false){
+           return null;
+       }else{
+           return resultado;
+       }
+    }
     public Producto buscarProducto(String nombre){
         Producto resultado = null;
         Iterator <Producto> it = this.productos.iterator();
@@ -40,6 +76,25 @@ public class CatalogoProductos {
             }
         }
         return platos;
+    }
+    public ArrayList<Postre> getPostres(){
+        ArrayList<Postre> postres = new ArrayList<>();
+        for (Producto producto:productos){
+            if(producto instanceof Postre){
+                postres.add((Postre) producto);
+            }
+        }
+        return postres;
+    }
+    
+    public ArrayList<Bebida> getBebidas(){
+        ArrayList<Bebida> bebidas = new ArrayList<>();
+        for (Producto producto:productos){
+            if(producto instanceof Bebida){
+                bebidas.add((Bebida) producto);
+            }
+        }
+        return bebidas;
     }
     public void agregarProducto(Producto producto) {
         productos.add(producto);

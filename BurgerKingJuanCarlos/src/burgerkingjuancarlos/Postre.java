@@ -15,7 +15,9 @@ public class Postre extends Producto {
     public Tamanyo getTamaño() {
         return tamanyo;
     }
-
+    public void setTamaño(Tamanyo tamaño){
+        this.tamanyo= tamaño;
+    }
     @Override
     public String toString() {
         return super.toString() + ", tamaño=" + tamanyo;

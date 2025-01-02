@@ -5,20 +5,22 @@
 package burgerkingjuancarlos;
 
 public class Bebida extends Producto {
-    private int cantidad; // En mililitros
+    private Tamanyo cantidad; // En mililitros
 
-    public Bebida(String nombre, String imagen, int precio, int tiempoElaboracion, int cantidad) {
+    public Bebida(String nombre, String imagen, int precio, int tiempoElaboracion, Tamanyo cantidad) {
         super(nombre, imagen, precio, tiempoElaboracion);
         this.cantidad = cantidad;
     }
-
-    public int getCantidad() {
+    public void setCantidad(Tamanyo tamano){
+        this.cantidad = tamano;
+    }
+    public Tamanyo getCantidad() {
         return cantidad;
     }
 
     @Override
     public String toString() {
-        return super.toString() + ", cantidad=" + cantidad + "ml";
+        return super.toString() + ", tamaño=" + cantidad;
     }
 }
 
