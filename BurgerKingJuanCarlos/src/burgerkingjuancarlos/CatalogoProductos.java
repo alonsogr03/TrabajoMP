@@ -14,10 +14,47 @@ public class CatalogoProductos {
     public CatalogoProductos() {
         this.productos = new ArrayList<>();
     }
+     public Menu buscarMenu(String nombre){
+        Menu resultado = null;
+        ArrayList<Menu> menus = this.getMenus();
+        Iterator <Menu> it = menus.iterator();
+        boolean encontrado = false;
+        while (it.hasNext() && !encontrado){
+            resultado=it.next();
+            if (nombre.equals(resultado.getNombre())){
+                return resultado;
+                
+            }  
+        }
+       if(encontrado == false){
+           return null;
+       }else{
+           return resultado;
+       }
+    }
+    
     public Bebida buscarBebida(String nombre){
         Bebida resultado = null;
         ArrayList<Bebida> bebidas = this.getBebidas();
         Iterator <Bebida> it = bebidas.iterator();
+        boolean encontrado = false;
+        while (it.hasNext() && !encontrado){
+            resultado=it.next();
+            if (nombre.equals(resultado.getNombre())){
+                return resultado;
+                
+            }  
+        }
+       if(encontrado == false){
+           return null;
+       }else{
+           return resultado;
+       }
+    }
+    public Principal buscarPlato(String nombre){
+        Principal resultado = null;
+        ArrayList<Principal> plato = this.getPlatosPrincipales();
+        Iterator <Principal> it = plato.iterator();
         boolean encontrado = false;
         while (it.hasNext() && !encontrado){
             resultado=it.next();
@@ -95,6 +132,16 @@ public class CatalogoProductos {
             }
         }
         return bebidas;
+    }
+    
+    public ArrayList<Menu> getMenus(){
+        ArrayList<Menu> menus = new ArrayList<>();
+        for (Producto producto:productos){
+            if(producto instanceof Menu){
+                menus.add((Menu) producto);
+            }
+        }
+        return menus;
     }
     public void agregarProducto(Producto producto) {
         productos.add(producto);

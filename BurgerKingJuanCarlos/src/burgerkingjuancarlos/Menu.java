@@ -21,6 +21,18 @@ public class Menu extends Producto {
     public Principal getPlato() {
         return plato;
     }
+
+    public void setPlato(Principal plato) {
+        this.plato = plato;
+    }
+
+    public void setBebida(Bebida bebida) {
+        this.bebida = bebida;
+    }
+
+    public void setPostre(Postre postre) {
+        this.postre = postre;
+    }
     
    
 
