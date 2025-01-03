@@ -4,7 +4,9 @@
  */
 package burgerkingjuancarlos;
 
-public class Principal extends Producto {
+import java.io.Serializable;
+
+public class Principal extends Producto implements Serializable {
 
     public Principal(String nombre, String imagen, int precio, int tiempoElaboracion) {
         super(nombre, imagen, precio, tiempoElaboracion);

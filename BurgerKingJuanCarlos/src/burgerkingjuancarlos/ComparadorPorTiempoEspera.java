@@ -6,10 +6,10 @@ package burgerkingjuancarlos;
 
 import java.util.Comparator;
 
-public class ComparadorPorNombre implements Comparator<Producto> {
+public class ComparadorPorTiempoEspera implements Comparator<Ticket> {
    
-    public int compare(Producto p1, Producto p2) {
-        return (p1.getNombre().compareTo(p2.getNombre()));
-       
+    @Override
+    public int compare(Ticket p1, Ticket p2) {
+        return (p2.getTiempoEstimado()-p1.getTiempoEstimado());  
     }
 }

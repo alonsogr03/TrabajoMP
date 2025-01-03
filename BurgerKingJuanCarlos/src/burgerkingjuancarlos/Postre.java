@@ -4,7 +4,9 @@
  */
 package burgerkingjuancarlos;
 
-public class Postre extends Producto {
+import java.io.Serializable;
+
+public class Postre extends Producto implements Serializable {
     private Tamanyo tamanyo;
 
     public Postre(String nombre, String imagen, int precio, int tiempoElaboracion, Tamanyo tamanyo) {

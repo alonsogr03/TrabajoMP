@@ -4,15 +4,15 @@
  */
 package burgerkingjuancarlos;
 
-import static burgerkingjuancarlos.ModoCliente.productospedidos;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Ticket {
+public class Ticket implements Serializable {
     private int id;
     private ArrayList<Producto> productos;
-    private double precioTotal;
+    private int precioTotal;
     private int tiempoEstimado;
     private LocalDateTime horaPedido;
 
@@ -24,16 +24,13 @@ public class Ticket {
         this.tiempoEstimado = 0;
     }
 
-    public void añadirProducto(Producto producto, int cantidad) {
-        for(int i=0; i<=cantidad; i++){
-            productos.add(producto);
-            
-        }
+    public void añadirProducto(Producto producto) {
+        productos.add(producto);
         precioTotal += producto.getPrecio();
         tiempoEstimado += producto.getTiempoElaboracion();
     }
 
-    public double getPrecioTotal() {
+    public int getPrecioTotal() {
         return precioTotal;
     }
 
@@ -75,7 +72,7 @@ public class Ticket {
         this.productos = productos;
     }
 
-    public void setPrecioTotal(double precioTotal) {
+    public void setPrecioTotal(int precioTotal) {
         this.precioTotal = precioTotal;
     }
 

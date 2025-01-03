@@ -4,7 +4,9 @@
  */
 package burgerkingjuancarlos;
 
-public class Menu extends Producto {
+import java.io.Serializable;
+
+public class Menu extends Producto implements Serializable{
     private Principal plato;
     private Bebida bebida;
     private Postre postre;

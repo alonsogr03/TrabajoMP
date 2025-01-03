@@ -4,7 +4,9 @@
  */
 package burgerkingjuancarlos;
 
-public class Bebida extends Producto {
+import java.io.Serializable;
+
+public class Bebida extends Producto implements Serializable {
     private Tamanyo cantidad; // En mililitros
 
     public Bebida(String nombre, String imagen, int precio, int tiempoElaboracion, Tamanyo cantidad) {

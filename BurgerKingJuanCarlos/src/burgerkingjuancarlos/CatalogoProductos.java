@@ -4,11 +4,12 @@
  */
 package burgerkingjuancarlos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 
-public class CatalogoProductos {
+public class CatalogoProductos implements Serializable {
     private ArrayList<Producto> productos;
 
     public CatalogoProductos() {
