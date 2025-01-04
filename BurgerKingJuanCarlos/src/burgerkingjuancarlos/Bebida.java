@@ -7,9 +7,9 @@ package burgerkingjuancarlos;
 import java.io.Serializable;
 
 public class Bebida extends Producto implements Serializable {
-    private Tamanyo cantidad; // En mililitros
+    private Tamanyo cantidad;
 
-    public Bebida(String nombre, String imagen, int precio, int tiempoElaboracion, Tamanyo cantidad) {
+    public Bebida(String nombre, String imagen, double precio, double tiempoElaboracion, Tamanyo cantidad) {
         super(nombre, imagen, precio, tiempoElaboracion);
         this.cantidad = cantidad;
     }
@@ -22,7 +22,7 @@ public class Bebida extends Producto implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString() + ", tamaño=" + cantidad;
+        return "  Bebida   \n"+super.toString() + "\nTamaño=" + cantidad;
     }
 }
 

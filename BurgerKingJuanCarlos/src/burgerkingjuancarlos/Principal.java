@@ -8,12 +8,12 @@ import java.io.Serializable;
 
 public class Principal extends Producto implements Serializable {
 
-    public Principal(String nombre, String imagen, int precio, int tiempoElaboracion) {
+    public Principal(String nombre, String imagen, double precio, double tiempoElaboracion) {
         super(nombre, imagen, precio, tiempoElaboracion);
     }
    
     public String toString(){
-        return "Plato Principal: \n" +super.toString();
+        return "  Plato Principal \n" +super.toString();
     }
    
 }

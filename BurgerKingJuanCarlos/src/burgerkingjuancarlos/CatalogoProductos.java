@@ -15,6 +15,65 @@ public class CatalogoProductos implements Serializable {
     public CatalogoProductos() {
         this.productos = new ArrayList<>();
     }
+    public boolean sePuedeAnadirPrincipal(Producto producto){
+        boolean sePuede = true;
+        int i=0;
+        while (i<productos.size() && sePuede==true){
+            if(productos.get(i).getNombre().equals(producto.getNombre())){
+                //He encontrado un producto con el mismo nombre, ahora debo comprobar que no es de ninguna de las demás clases:
+                
+                if (productos.get(i).getClass() == Bebida.class || productos.get(i).getClass()== Postre.class  || productos.get(i).getClass() == Menu.class){
+                    sePuede=false;
+                }
+            }
+            i++;
+        }
+        return sePuede;
+    }
+    public boolean sePuedeAnadirPostre(Producto producto){
+        boolean sePuede = true;
+        int i=0;
+        while (i<productos.size() && sePuede==true){
+            if(productos.get(i).getNombre().equals(producto.getNombre())){
+                //He encontrado un producto con el mismo nombre, ahora debo comprobar que no es de ninguna de las demás clases:
+                
+                if (productos.get(i).getClass() == Bebida.class || productos.get(i).getClass()== Principal.class  || productos.get(i).getClass() == Menu.class){
+                    sePuede=false;
+                }
+            }
+            i++;
+        }
+        return sePuede;
+    }
+    public boolean sePuedeAnadirMenu(Producto producto){
+        boolean sePuede = true;
+        int i=0;
+        while (i<productos.size() && sePuede==true){
+            if(productos.get(i).getNombre().equals(producto.getNombre())){
+                //He encontrado un producto con el mismo nombre, ahora debo comprobar que no es de ninguna de las demás clases:
+                
+                if (productos.get(i).getClass() == Bebida.class || productos.get(i).getClass()== Principal.class  || productos.get(i).getClass() == Postre.class){
+                    sePuede=false;
+                }
+            }
+            i++;
+        }
+        return sePuede;
+    }
+    public boolean sePuedeAnadirBebida(Producto producto){
+        boolean sePuede = true;
+        int i=0;
+        while (i<productos.size() && sePuede==true){
+            if(productos.get(i).getNombre().equals(producto.getNombre())){
+                //He encontrado un producto con el mismo nombre, ahora debo comprobar que no es de ninguna de las demás clases:
+                if (productos.get(i).getClass() == Menu.class || productos.get(i).getClass()== Principal.class  || productos.get(i).getClass() == Postre.class){
+                    sePuede=false;
+                }
+            }
+            i++;
+        }
+        return sePuede;
+    }
      public Menu buscarMenu(String nombre){
         Menu resultado = null;
         ArrayList<Menu> menus = this.getMenus();

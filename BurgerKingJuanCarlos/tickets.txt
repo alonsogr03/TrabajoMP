@@ -1,0 +1,41 @@
+===== TICKET DE PEDIDO =====
+ID Pedido: 3
+Hora del Pedido: 2025-01-04 12:58:30
+
+Productos:
+- CocaCola : $5.0
+- CocaCola : $5.0
+- Hamburguesa : $5.0
+- Hamburguesa : $5.0
+- Hamburguesa : $5.0
+
+Precio Total: $25.0
+Tiempo Estimado: 220.0 segundos
+===========================
+
+===== TICKET DE PEDIDO =====
+ID Pedido: 2
+Hora del Pedido: 2025-01-04 12:58:16
+
+Productos:
+- Hamburguesa : $5.0
+- Hamburguesa : $5.0
+- Hamburguesa : $5.0
+- Hamburguesa : $5.0
+
+Precio Total: $20.0
+Tiempo Estimado: 160.0 segundos
+===========================
+
+===== TICKET DE PEDIDO =====
+ID Pedido: 1
+Hora del Pedido: 2025-01-04 12:58:01
+
+Productos:
+- Hamburguesa : $5.0
+- CocaCola : $5.0
+
+Precio Total: $10.0
+Tiempo Estimado: 90.0 segundos
+===========================
+

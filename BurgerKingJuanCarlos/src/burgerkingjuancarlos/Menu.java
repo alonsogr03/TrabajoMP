@@ -10,16 +10,16 @@ public class Menu extends Producto implements Serializable{
     private Principal plato;
     private Bebida bebida;
     private Postre postre;
-    
 
     public Menu(String nombre, String imagen, Principal plato, Bebida bebida, Postre postre) {
         super(nombre, imagen, plato.getPrecio() + bebida.getPrecio() + postre.getPrecio(),
-                plato.getTiempoElaboracion() + bebida.getTiempoElaboracion() + postre.getTiempoElaboracion());
+                (plato.getTiempoElaboracion() + bebida.getTiempoElaboracion()+ postre.getTiempoElaboracion())*0.9
+        );
         this.plato = plato;
         this.bebida = bebida;
         this.postre = postre;
     }
-
+    
     public Principal getPlato() {
         return plato;
     }

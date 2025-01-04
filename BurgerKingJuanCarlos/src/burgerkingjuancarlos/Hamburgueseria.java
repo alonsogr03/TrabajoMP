@@ -16,7 +16,6 @@ public class Hamburgueseria implements Serializable{
     CatalogoProductos catalogo = new CatalogoProductos();
     ArrayList<Ticket> listadoTickets = new ArrayList<>();
     private Ticket pedido;
-    String backup;
 
     public CatalogoProductos getCatalogo() {
         return catalogo;

@@ -9,10 +9,10 @@ import java.io.Serializable;
 public abstract class Producto implements Serializable {
     private String nombre;
     private String imagen;
-    private int precio;
-    private int tiempoElaboracion;
+    private double precio;
+    private double tiempoElaboracion;
 
-    public Producto(String nombre, String imagen, int precio, int tiempoElaboracion) {
+    public Producto(String nombre, String imagen, double precio, double tiempoElaboracion) {
         this.nombre = nombre;
         this.imagen = imagen;
         this.precio = precio;
@@ -27,26 +27,26 @@ public abstract class Producto implements Serializable {
         return imagen;
     }
 
-    public int getPrecio() {
+    public double getPrecio() {
         return precio;
     }
     public void setImagen(String imagen){
         this.imagen = imagen;
     }
-    public void setPrecio(int precio){
+    public void setPrecio(double precio){
         this.precio=precio;
     }
-    public int getTiempoElaboracion() {
+    public double getTiempoElaboracion() {
         return tiempoElaboracion;
     }
-    public void setTiempoElabocion(int tiempo){
+    public void setTiempoElabocion(double tiempo){
         this.tiempoElaboracion = tiempo;
     }
 
     @Override
     public String toString() {
         return "Nombre= " + nombre + ",\n" +
-               "Precio=" + precio + ",\n" +
+               "Precio=" + precio + "€,\n" +
                "Tiempo elaboracion=" + tiempoElaboracion + " segundos\n";
     }
 }

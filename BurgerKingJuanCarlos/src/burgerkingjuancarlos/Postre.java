@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Postre extends Producto implements Serializable {
     private Tamanyo tamanyo;
 
-    public Postre(String nombre, String imagen, int precio, int tiempoElaboracion, Tamanyo tamanyo) {
+    public Postre(String nombre, String imagen, double precio, double tiempoElaboracion, Tamanyo tamanyo) {
         super(nombre, imagen, precio, tiempoElaboracion);
         this.tamanyo = tamanyo;
     }
@@ -22,6 +22,6 @@ public class Postre extends Producto implements Serializable {
     }
     @Override
     public String toString() {
-        return super.toString() + ", tamaño=" + tamanyo;
+        return "  Postres:  \n"+ super.toString() + "\nTamaño=" + tamanyo;
     }
 }

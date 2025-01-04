@@ -10,6 +10,6 @@ public class ComparadorPorTiempoEspera implements Comparator<Ticket> {
    
     @Override
     public int compare(Ticket p1, Ticket p2) {
-        return (p2.getTiempoEstimado()-p1.getTiempoEstimado());  
+        return (int)(p2.getTiempoEstimado()-p1.getTiempoEstimado());  
     }
 }

@@ -6,20 +6,21 @@ package burgerkingjuancarlos;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ticket implements Serializable {
     private int id;
     private ArrayList<Producto> productos;
-    private int precioTotal;
-    private int tiempoEstimado;
-    private LocalDateTime horaPedido;
+    private double precioTotal;
+    private double tiempoEstimado;
+    private String horaPedido;
 
     public Ticket(int id) {
         this.id = id;
         this.productos = new ArrayList<>();
-        this.horaPedido = LocalDateTime.now();
+        this.horaPedido = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         this.precioTotal = 0;
         this.tiempoEstimado = 0;
     }
@@ -30,15 +31,15 @@ public class Ticket implements Serializable {
         tiempoEstimado += producto.getTiempoElaboracion();
     }
 
-    public int getPrecioTotal() {
+    public double getPrecioTotal() {
         return precioTotal;
     }
 
-    public int getTiempoEstimado() {
+    public double getTiempoEstimado() {
         return tiempoEstimado;
     }
 
-    public LocalDateTime getHoraPedido() {
+    public String getHoraPedido() {
         return horaPedido;
     }
    
@@ -72,15 +73,15 @@ public class Ticket implements Serializable {
         this.productos = productos;
     }
 
-    public void setPrecioTotal(int precioTotal) {
+    public void setPrecioTotal(double precioTotal) {
         this.precioTotal = precioTotal;
     }
 
-    public void setTiempoEstimado(int tiempoEstimado) {
+    public void setTiempoEstimado(double tiempoEstimado) {
         this.tiempoEstimado = tiempoEstimado;
     }
 
-    public void setHoraPedido(LocalDateTime horaPedido) {
+    public void setHoraPedido(String horaPedido) {
         this.horaPedido = horaPedido;
     }
     
