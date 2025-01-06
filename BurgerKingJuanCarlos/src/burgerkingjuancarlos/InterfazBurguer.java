@@ -8,7 +8,10 @@ import static burgerkingjuancarlos.ModoAdministrador.ticketpedidos;
 import java.awt.CardLayout;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -16,11 +19,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -44,6 +52,33 @@ public class InterfazBurguer extends javax.swing.JFrame {
         initComponents();
         CardLayout c1 = (CardLayout) this.panelPrincipal.getLayout();
         c1.show(this.panelPrincipal, "cardMenuPrincipal");
+        
+        // Agregar un WindowListener para manejar el evento de cierre
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                realizarCopiaDeSeguridad();
+            }
+        });
+    }
+    private void realizarCopiaDeSeguridad(){
+        String fileName = "productos" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")) + ".dat";
+        try ( FileOutputStream out = new FileOutputStream(fileName);  ObjectOutputStream so = new ObjectOutputStream(out)) {
+            so.writeObject(urjc.getCatalogo());
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Copia de seguridad automática realizada con éxito.",
+                    "Copia realizada",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Error al hacer la copia de seguridad automática.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
     }
 
     /**
@@ -1529,6 +1564,11 @@ public class InterfazBurguer extends javax.swing.JFrame {
         // TODO add your handling code here:
         CardLayout c1 = (CardLayout) this.panelPrincipal.getLayout();
         c1.show(this.panelPrincipal, "cardMenuPrincipal");
+        
+        //Vacío todo: 
+        this.productosPedido.removeAllElements();
+        this.txtInfoProductoPedido.setText("");
+        this.imagenProductoPedido.setIcon(null);
     }//GEN-LAST:event_btnVolverMenuPedidoActionPerformed
 
     private void btnPedirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedirActionPerformed
@@ -1653,45 +1693,81 @@ public class InterfazBurguer extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnEliminarPlatoActionPerformed
 
+    private boolean comprobarPlatoRellenado(){
+        boolean condicion1 = this.txtNombrePlato.getText().equals("");
+        boolean condicion2 = this.txtImagenPlato.getText().equals("");
+        boolean condicion3 = this.txtPrecioPlato.getText().equals("");
+        boolean condicion4 = this.txtTiempoPlato.getText().equals("");
+        
+        return (condicion1 || condicion2 || condicion3 || condicion4);
+    }
+    private boolean comprobarBebidaRellenado(){
+        boolean condicion1 = this.txtNombreBebida.getText().equals("");
+        boolean condicion2 = this.txtImagenBebida.getText().equals("");
+        boolean condicion3 = this.txtPrecioBebida.getText().equals("");
+        boolean condicion4 = this.txtTiempoBebida.getText().equals("");
+        
+        return (condicion1 || condicion2 || condicion3 || condicion4);
+    }
+    private boolean comprobarPostreRellenado(){
+        boolean condicion1 = this.txtNombrePostre.getText().equals("");
+        boolean condicion2 = this.txtImagenPostre.getText().equals("");
+        boolean condicion3 = this.txtPrecioPostre.getText().equals("");
+        boolean condicion4 = this.txtTiempoPostre.getText().equals("");
+        
+        return (condicion1 || condicion2 || condicion3 || condicion4);
+    }
     private void btnAnadirProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirProductoActionPerformed
         // TODO add your handling code here:
-        //Voy a coger los elementos, los cargo en un objeto de la clase Principal
-        String nombrePlato = this.txtNombrePlato.getText();
-        String imagenPlato = this.txtImagenPlato.getText();
-        double precio = Double.parseDouble(this.txtPrecioPlato.getText());
-        double tiempo = Double.parseDouble(this.txtTiempoPlato.getText());
-        //Ahora creo el producto. 
-        Producto plato = new Principal(nombrePlato, imagenPlato, precio, tiempo);
-        //Cargo el catálogo: 
-        CatalogoProductos catalogo = urjc.getCatalogo();
-        //Busco si está:
+        if (!this.comprobarPlatoRellenado()) {
+            String nombrePlato = this.txtNombrePlato.getText();
+            String imagenPlato = this.txtImagenPlato.getText();
+            double precio = Double.parseDouble(this.txtPrecioPlato.getText());
+            double tiempo = Double.parseDouble(this.txtTiempoPlato.getText());
+            //Ahora creo el producto. 
+            Producto plato = new Principal(nombrePlato, imagenPlato, precio, tiempo);
+            //Cargo el catálogo: 
+            CatalogoProductos catalogo = urjc.getCatalogo();
+            //Busco si está:
 
-        if (catalogo.sePuedeAnadirPrincipal(plato)) {
-            Producto producto = catalogo.buscarProducto(nombrePlato);
-            if (producto != null) {
-                //En este caso, tenemos que modificar el objeto ya añadido: 
-                producto.setImagen(imagenPlato);
-                producto.setPrecio(precio);
-                producto.setTiempoElabocion(tiempo);
-            } else {
-                //Si no existe, lo podemos agregar.
-                catalogo.agregarProducto(plato);
-                //Lo añado a la lista: 
-                //Cargo la lista de productos y cambio de pantalla.
-                this.listaPlatosPrincipales.removeAllElements();
-                for (Principal principal : catalogo.getPlatosPrincipales()) {
-                    listaPlatosPrincipales.addElement(principal.getNombre());
+            if (catalogo.sePuedeAnadirPrincipal(plato)) {
+                Producto producto = catalogo.buscarProducto(nombrePlato);
+                if (producto != null) {
+                    //En este caso, tenemos que modificar el objeto ya añadido: 
+                    producto.setImagen(imagenPlato);
+                    producto.setPrecio(precio);
+                    producto.setTiempoElabocion(tiempo);
+                } else {
+                    //Si no existe, lo podemos agregar.
+                    catalogo.agregarProducto(plato);
+                    //Lo añado a la lista: 
+                    //Cargo la lista de productos y cambio de pantalla.
+                    this.listaPlatosPrincipales.removeAllElements();
+                    for (Principal principal : catalogo.getPlatosPrincipales()) {
+                        listaPlatosPrincipales.addElement(principal.getNombre());
+                    }
                 }
+            } else {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "El producto no se puede añadir ni modificar porque no es un Plato Principal.",
+                        "Producto duplicado",
+                        JOptionPane.WARNING_MESSAGE
+                );
+
             }
         } else {
             JOptionPane.showMessageDialog(
                     null,
-                    "El producto no se puede añadir ni modificar porque no es un Plato Principal.",
-                    "Producto duplicado",
+                    "El producto no se puede añadir ni modificar porque está incompleto.",
+                    "Producto Incompleto",
                     JOptionPane.WARNING_MESSAGE
             );
-
         }
+        
+        
+        
+        
 
 
     }//GEN-LAST:event_btnAnadirProductoActionPerformed
@@ -1811,52 +1887,61 @@ public class InterfazBurguer extends javax.swing.JFrame {
 
     private void btnAnadirBebidaAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirBebidaAdminActionPerformed
         // TODO add your handling code here://Voy a coger los elementos, los cargo en un objeto de la clase Principal
-        String nombreBebida = this.txtNombreBebida.getText();
-        String imagenBebida = this.txtImagenBebida.getText();
-        double precio = Double.parseDouble(this.txtPrecioBebida.getText());
-        double tiempo = Double.parseDouble(this.txtTiempoBebida.getText());
-        //Cargo el tamaño: 
-        String tamano = (String) comboCantidadBebida.getSelectedItem();
-        Tamanyo size;
-        if (tamano.equals("PEQUEÑO")) {
-            size = Tamanyo.PEQUEÑO;
-        } else {
-            if (tamano.equals("MEDIANO")) {
-                size = Tamanyo.MEDIANO;
+        if (!this.comprobarBebidaRellenado()) {
+            String nombreBebida = this.txtNombreBebida.getText();
+            String imagenBebida = this.txtImagenBebida.getText();
+            double precio = Double.parseDouble(this.txtPrecioBebida.getText());
+            double tiempo = Double.parseDouble(this.txtTiempoBebida.getText());
+            //Cargo el tamaño: 
+            String tamano = (String) comboCantidadBebida.getSelectedItem();
+            Tamanyo size;
+            if (tamano.equals("PEQUEÑO")) {
+                size = Tamanyo.PEQUEÑO;
             } else {
-                size = Tamanyo.GRANDE;
-            }
-        }
-        Producto bebida = new Bebida(nombreBebida, imagenBebida, precio, tiempo, size);
-        //Cargo el catálogo: 
-        CatalogoProductos catalogo = urjc.getCatalogo();
-
-        if (catalogo.sePuedeAnadirBebida(bebida)) {
-            //Busco si está: 
-            Bebida producto = catalogo.buscarBebida(nombreBebida);
-
-            if (producto != null) {
-                //En este caso, tenemos que modificar el objeto ya añadido: 
-                producto.setImagen(imagenBebida);
-                producto.setPrecio(precio);
-                producto.setTiempoElabocion(tiempo);
-                producto.setCantidad(size);
-
-            } else {
-                //Si no existe, lo podemos agregar.
-                catalogo.agregarProducto(bebida);
-                //Lo añado a la lista: 
-                //Cargo la lista de productos y cambio de pantalla.
-                this.listaBebidas.removeAllElements();
-                for (Bebida bebidas : catalogo.getBebidas()) {
-                    listaBebidas.addElement(bebidas.getNombre());
+                if (tamano.equals("MEDIANO")) {
+                    size = Tamanyo.MEDIANO;
+                } else {
+                    size = Tamanyo.GRANDE;
                 }
+            }
+            Producto bebida = new Bebida(nombreBebida, imagenBebida, precio, tiempo, size);
+            //Cargo el catálogo: 
+            CatalogoProductos catalogo = urjc.getCatalogo();
+
+            if (catalogo.sePuedeAnadirBebida(bebida)) {
+                //Busco si está: 
+                Bebida producto = catalogo.buscarBebida(nombreBebida);
+
+                if (producto != null) {
+                    //En este caso, tenemos que modificar el objeto ya añadido: 
+                    producto.setImagen(imagenBebida);
+                    producto.setPrecio(precio);
+                    producto.setTiempoElabocion(tiempo);
+                    producto.setCantidad(size);
+
+                } else {
+                    //Si no existe, lo podemos agregar.
+                    catalogo.agregarProducto(bebida);
+                    //Lo añado a la lista: 
+                    //Cargo la lista de productos y cambio de pantalla.
+                    this.listaBebidas.removeAllElements();
+                    for (Bebida bebidas : catalogo.getBebidas()) {
+                        listaBebidas.addElement(bebidas.getNombre());
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "No se puede añadir ni modificar, el producto ya existe y es de otro tipo.",
+                        "Producto duplicado",
+                        JOptionPane.WARNING_MESSAGE
+                );
             }
         } else {
             JOptionPane.showMessageDialog(
                     null,
-                    "No se puede añadir ni modificar, el producto ya existe y es de otro tipo.",
-                    "Producto duplicado",
+                    "No se puede añadir ni modificar, el producto está incompleto.",
+                    "Producto incompleto",
                     JOptionPane.WARNING_MESSAGE
             );
         }
@@ -1943,7 +2028,8 @@ public class InterfazBurguer extends javax.swing.JFrame {
 
     private void btnAñadirPostresAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirPostresAdminActionPerformed
         // TODO add your handling code here:
-        String nombrePostre = this.txtNombrePostre.getText();
+        if(!this.comprobarPostreRellenado()){
+            String nombrePostre = this.txtNombrePostre.getText();
         String imagenPostre = this.txtImagenPostre.getText();
         double precio = Double.parseDouble(this.txtPrecioPostre.getText());
         double tiempo = Double.parseDouble(this.txtTiempoPostre.getText());
@@ -1992,6 +2078,14 @@ public class InterfazBurguer extends javax.swing.JFrame {
             );
         }
 
+        }else{
+            JOptionPane.showMessageDialog(
+                    null,
+                    "No se puede añadir ni modificar, el producto está incompleto.",
+                    "Producto incompleto",
+                    JOptionPane.WARNING_MESSAGE
+            );
+        }
     }//GEN-LAST:event_btnAñadirPostresAdminActionPerformed
 
     private void btnMenusProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenusProductosActionPerformed
@@ -2066,16 +2160,18 @@ public class InterfazBurguer extends javax.swing.JFrame {
         // TODO add your handling code here:
         String nombreMenu = this.txtNombreMenu.getText();
         String imagenMenu = this.txtImagenMenu.getText();
+        boolean nombreVacio = nombreMenu.equals("");
+        boolean imagenVacio = imagenMenu.equals("");
         //Cargo tanto el postre como los demás: 
         String platoPrincipalStr = this.listaPlatosPrincipalesMenu.getSelectedValue();
         String bebidaStr = this.listaBebidasMenu.getSelectedValue();
         String postreStr = this.listaPostreMenu.getSelectedValue();
 
-        if (platoPrincipalStr == null || bebidaStr == null || postreStr == null) {
+        if (platoPrincipalStr == null || bebidaStr == null || postreStr == null || nombreVacio == true || imagenVacio == true) {
             //aquí que salte un aviso de que no se puede meter un menú si falta algún componente.
             JOptionPane.showMessageDialog(
                     null, // Componente padre (null para centrar en la pantalla)
-                    "No hay productos suficientes para crear un menú.", // Mensaje
+                    "No hay elementos suficientes para crear un menú.", // Mensaje
                     "Advertencia", // Título de la ventana
                     JOptionPane.WARNING_MESSAGE // Icono de advertencia
             );
@@ -2118,7 +2214,9 @@ public class InterfazBurguer extends javax.swing.JFrame {
     private void btnAñadirPlatoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirPlatoPedidoActionPerformed
         // TODO add your handling code here:
         //Primero compruebo si la lista está vacía. 
-        if (!this.listaPlatosPrincipales.isEmpty()) {
+        boolean condicion2 = this.listaPlatosPrincipalesPedido.getSelectedValue() == null;
+        
+        if (!this.listaPlatosPrincipales.isEmpty() && condicion2==false) {
             //Si no está vacía, voy a coger el elemento seleccionado. 
             String platoSeleccionado = this.listaPlatosPrincipalesPedido.getSelectedValue();
             //Una vez que lo hemos recogido, lo volcamos en la nueva lista: 
@@ -2127,7 +2225,7 @@ public class InterfazBurguer extends javax.swing.JFrame {
             //Como está vacía, no puedo añadir nada, luego mando un mensaje: 
             JOptionPane.showMessageDialog(
                     null,
-                    "⚠️ Advertencia: No hay platos principales en el catálogo.",
+                    "⚠️ Advertencia: No ha seleccionado ningún Plato Principal.",
                     "Advertencia",
                     JOptionPane.WARNING_MESSAGE
             );
@@ -2138,7 +2236,9 @@ public class InterfazBurguer extends javax.swing.JFrame {
 
     private void btnAñadirBebidaPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirBebidaPedidoActionPerformed
         // TODO add your handling code here:
-        if (!this.listaBebidas.isEmpty()) {
+        boolean condicion2 = this.listaBebidasPedido.getSelectedValue() == null;
+       
+        if (!this.listaBebidas.isEmpty() && condicion2==false) {
             //Si no está vacía, voy a coger el elemento seleccionado. 
             String platoSeleccionado = this.listaBebidasPedido.getSelectedValue();
             //Una vez que lo hemos recogido, lo volcamos en la nueva lista: 
@@ -2147,7 +2247,7 @@ public class InterfazBurguer extends javax.swing.JFrame {
             //Como está vacía, no puedo añadir nada, luego mando un mensaje: 
             JOptionPane.showMessageDialog(
                     null,
-                    "⚠️ Advertencia: No hay bebidas en el catálogo.",
+                    "⚠️ Advertencia: No ha seleccionado ninguna bebida del catálogo.",
                     "Advertencia",
                     JOptionPane.WARNING_MESSAGE
             );
@@ -2156,7 +2256,9 @@ public class InterfazBurguer extends javax.swing.JFrame {
 
     private void btnAñadirPostrePedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirPostrePedidoActionPerformed
         // TODO add your handling code here:
-        if (!this.listaPostres.isEmpty()) {
+        boolean condicion2 = this.listaPostresPedidos.getSelectedValue() == null;
+       
+        if (!this.listaPostres.isEmpty() && condicion2==false) {
             //Si no está vacía, voy a coger el elemento seleccionado. 
             String platoSeleccionado = this.listaPostresPedidos.getSelectedValue();
             //Una vez que lo hemos recogido, lo volcamos en la nueva lista: 
@@ -2165,7 +2267,7 @@ public class InterfazBurguer extends javax.swing.JFrame {
             //Como está vacía, no puedo añadir nada, luego mando un mensaje: 
             JOptionPane.showMessageDialog(
                     null,
-                    "⚠️ Advertencia: No hay postres en el catálogo.",
+                    "⚠️ Advertencia: No ha seleccionado ningún postre.",
                     "Advertencia",
                     JOptionPane.WARNING_MESSAGE
             );
@@ -2174,7 +2276,9 @@ public class InterfazBurguer extends javax.swing.JFrame {
 
     private void btnAñadirMenuPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirMenuPedidoActionPerformed
         // TODO add your handling code here:
-        if (!this.listaMenus.isEmpty()) {
+        boolean condicion2 = this.listaMenusPedido.getSelectedValue() == null;
+       
+        if (!this.listaMenus.isEmpty() && condicion2==false) {
             //Si no está vacía, voy a coger el elemento seleccionado. 
             String platoSeleccionado = this.listaMenusPedido.getSelectedValue();
             //Una vez que lo hemos recogido, lo volcamos en la nueva lista: 
@@ -2183,7 +2287,7 @@ public class InterfazBurguer extends javax.swing.JFrame {
             //Como está vacía, no puedo añadir nada, luego mando un mensaje: 
             JOptionPane.showMessageDialog(
                     null,
-                    "⚠️ Advertencia: No hay menús en el catálogo.",
+                    "⚠️ Advertencia: No ha seleccionado ningún menú.",
                     "Advertencia",
                     JOptionPane.WARNING_MESSAGE
             );
@@ -2192,7 +2296,9 @@ public class InterfazBurguer extends javax.swing.JFrame {
 
     private void btnVerInfoPlatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerInfoPlatoActionPerformed
         // TODO add your handling code here:
-        if (!this.listaPlatosPrincipales.isEmpty()) {
+        boolean condicion2 = this.listaPlatosPrincipalesPedido.getSelectedValue() == null;
+       
+        if (!this.listaPlatosPrincipales.isEmpty() && condicion2==false) {
             //Si no está vacía, voy a coger el elemento seleccionado. 
             String platoSeleccionado = this.listaPlatosPrincipalesPedido.getSelectedValue();
             //Una vez que lo hemos recogido, buscamos el producto y printeamos su información:
@@ -2203,8 +2309,17 @@ public class InterfazBurguer extends javax.swing.JFrame {
             //Printeamos la imagen en el label: 
             //Cargo su foto. 
             String ruta = "/imagenes/" + producto.getImagen();
-            ImageIcon imagen = new ImageIcon(getClass().getResource(ruta));
-            this.imagenProductoPedido.setIcon(imagen);
+            java.net.URL recurso = getClass().getResource(ruta);
+            if (recurso != null) {
+                // Si la ruta es válida, cargar la imagen
+                ImageIcon imagen = new ImageIcon(recurso);
+                this.imagenProductoPedido.setIcon(imagen);
+            } else {
+                recurso = getClass().getResource("/imagenes/default.png");
+                // Si no se encuentra, establecer el JLabel en null
+                ImageIcon imagen = new ImageIcon(recurso);
+                this.imagenProductoPedido.setIcon(imagen);
+            }
 
         } else {
             //Como está vacía, no puedo añadir nada, luego mando un mensaje: 
@@ -2219,7 +2334,9 @@ public class InterfazBurguer extends javax.swing.JFrame {
 
     private void btnVerInfoBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerInfoBebidaActionPerformed
         // TODO add your handling code here:
-        if (!this.listaBebidas.isEmpty()) {
+        boolean condicion2 = this.listaBebidasPedido.getSelectedValue() == null;
+        
+        if (!this.listaBebidas.isEmpty() && condicion2==false) {
             //Si no está vacía, voy a coger el elemento seleccionado. 
             String platoSeleccionado = this.listaBebidasPedido.getSelectedValue();
             //Una vez que lo hemos recogido, buscamos el producto y printeamos su información:
@@ -2230,14 +2347,23 @@ public class InterfazBurguer extends javax.swing.JFrame {
             //Printeamos la imagen en el label: 
             //Cargo su foto. 
             String ruta = "/imagenes/" + producto.getImagen();
-            ImageIcon imagen = new ImageIcon(getClass().getResource(ruta));
-            this.imagenProductoPedido.setIcon(imagen);
+            java.net.URL recurso = getClass().getResource(ruta);
+            if (recurso != null) {
+                // Si la ruta es válida, cargar la imagen
+                ImageIcon imagen = new ImageIcon(recurso);
+                this.imagenProductoPedido.setIcon(imagen);
+            } else {
+                recurso = getClass().getResource("/imagenes/default.png");
+                // Si no se encuentra, establecer el JLabel en null
+                ImageIcon imagen = new ImageIcon(recurso);
+                this.imagenProductoPedido.setIcon(imagen);
+            }
 
         } else {
             //Como está vacía, no puedo añadir nada, luego mando un mensaje: 
             JOptionPane.showMessageDialog(
                     null,
-                    "⚠️ Advertencia: No hay bebidas en el catálogo.",
+                    "⚠️ Advertencia: No ha seleccionado ninguna bebida.",
                     "Advertencia",
                     JOptionPane.WARNING_MESSAGE
             );
@@ -2246,7 +2372,9 @@ public class InterfazBurguer extends javax.swing.JFrame {
 
     private void btnVerInfoPostreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerInfoPostreActionPerformed
         // TODO add your handling code here:
-        if (!this.listaPostres.isEmpty()) {
+        boolean condicion2 = this.listaPostresPedidos.getSelectedValue() == null;
+       
+        if (!this.listaPostres.isEmpty() && condicion2==false) {
             //Si no está vacía, voy a coger el elemento seleccionado. 
             String platoSeleccionado = this.listaPostresPedidos.getSelectedValue();
             //Una vez que lo hemos recogido, buscamos el producto y printeamos su información:
@@ -2257,14 +2385,23 @@ public class InterfazBurguer extends javax.swing.JFrame {
             //Printeamos la imagen en el label: 
             //Cargo su foto. 
             String ruta = "/imagenes/" + producto.getImagen();
-            ImageIcon imagen = new ImageIcon(getClass().getResource(ruta));
-            this.imagenProductoPedido.setIcon(imagen);
+            java.net.URL recurso = getClass().getResource(ruta);
+            if (recurso != null) {
+                // Si la ruta es válida, cargar la imagen
+                ImageIcon imagen = new ImageIcon(recurso);
+                this.imagenProductoPedido.setIcon(imagen);
+            } else {
+                recurso = getClass().getResource("/imagenes/default.png");
+                // Si no se encuentra, establecer el JLabel en null
+                ImageIcon imagen = new ImageIcon(recurso);
+                this.imagenProductoPedido.setIcon(imagen);
+            }
 
         } else {
             //Como está vacía, no puedo añadir nada, luego mando un mensaje: 
             JOptionPane.showMessageDialog(
                     null,
-                    "⚠️ Advertencia: No hay postres en el catálogo.",
+                    "⚠️ Advertencia: No ha seleccionado ningún postre.",
                     "Advertencia",
                     JOptionPane.WARNING_MESSAGE
             );
@@ -2273,7 +2410,9 @@ public class InterfazBurguer extends javax.swing.JFrame {
 
     private void btnVerInfoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerInfoMenuActionPerformed
         // TODO add your handling code here:
-        if (!this.listaMenus.isEmpty()) {
+        boolean condicion2 = this.listaMenusPedido.getSelectedValue() == null;
+       
+        if (!this.listaMenus.isEmpty() && condicion2==false) {
             //Si no está vacía, voy a coger el elemento seleccionado. 
             String platoSeleccionado = this.listaMenusPedido.getSelectedValue();
             //Una vez que lo hemos recogido, buscamos el producto y printeamos su información:
@@ -2284,14 +2423,23 @@ public class InterfazBurguer extends javax.swing.JFrame {
             //Printeamos la imagen en el label: 
             //Cargo su foto. 
             String ruta = "/imagenes/" + producto.getImagen();
-            ImageIcon imagen = new ImageIcon(getClass().getResource(ruta));
-            this.imagenProductoPedido.setIcon(imagen);
+            java.net.URL recurso = getClass().getResource(ruta);
+            if (recurso != null) {
+                // Si la ruta es válida, cargar la imagen
+                ImageIcon imagen = new ImageIcon(recurso);
+                this.imagenProductoPedido.setIcon(imagen);
+            } else {
+                recurso = getClass().getResource("/imagenes/default.png");
+                // Si no se encuentra, establecer el JLabel en null
+                ImageIcon imagen = new ImageIcon(recurso);
+                this.imagenProductoPedido.setIcon(imagen);
+            }
 
         } else {
             //Como está vacía, no puedo añadir nada, luego mando un mensaje: 
             JOptionPane.showMessageDialog(
                     null,
-                    "⚠️ Advertencia: No hay menús en el catálogo.",
+                    "⚠️ Advertencia: No ha seleccionado ningún menú.",
                     "Advertencia",
                     JOptionPane.WARNING_MESSAGE
             );
@@ -2300,7 +2448,9 @@ public class InterfazBurguer extends javax.swing.JFrame {
 
     private void btnEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProductoActionPerformed
         // TODO add your handling code here:
-        if (!this.productosPedido.isEmpty()) {
+        boolean condicion2 = this.listaCestaProductos.getSelectedValue() == null;
+       
+        if (!this.productosPedido.isEmpty() && condicion2==false) {
             //Cojo el elemento y lo elimino:
             int producto = this.listaCestaProductos.getSelectedIndex();
             //Lo elimino:
@@ -2309,7 +2459,7 @@ public class InterfazBurguer extends javax.swing.JFrame {
             //Como está vacía, no puedo añadir nada, luego mando un mensaje: 
             JOptionPane.showMessageDialog(
                     null,
-                    "⚠️ Advertencia: Usted no ha añadido ningún producto.",
+                    "⚠️ Advertencia: Usted no ha seleccionado ningún producto.",
                     "Advertencia",
                     JOptionPane.WARNING_MESSAGE
             );
@@ -2420,7 +2570,6 @@ public class InterfazBurguer extends javax.swing.JFrame {
     private void btnCopiaSeguridadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCopiaSeguridadActionPerformed
         // TODO add your handling code here:
         String fileName = "productos" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")) + ".dat";
-        fileName = "productos.dat";
         try ( FileOutputStream out = new FileOutputStream(fileName);  ObjectOutputStream so = new ObjectOutputStream(out)) {
             so.writeObject(urjc.getCatalogo());
             JOptionPane.showMessageDialog(
@@ -2446,40 +2595,39 @@ public class InterfazBurguer extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void btnRestaurarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarDatosActionPerformed
-        // TODO add your handling code here:
-        FileInputStream in = null;
-        ObjectInputStream si = null;
         try {
-            in = new FileInputStream("productos.dat");
-            si = new ObjectInputStream(in);
-            CatalogoProductos catalogo = (CatalogoProductos) si.readObject();
-            urjc.setCatalogo(catalogo);
-            si.close();
-            in.close();
+            // Ruta al directorio donde se guardan las copias de seguridad
+            Path directorio = Paths.get(".");
+
+            // Buscar el archivo más reciente basado en el nombre
+            File ultimaCopia = Files.list(directorio)
+                    .map(Path::toFile)
+                    .filter(file -> file.getName().startsWith("productos") && file.getName().endsWith(".dat"))
+                    .max(Comparator.comparing(File::getName))
+                    .orElseThrow(() -> new FileNotFoundException("No se encontraron copias de seguridad."));
+
+            // Deserializar el archivo y restaurar los datos
+            try ( FileInputStream in = new FileInputStream(ultimaCopia);  ObjectInputStream si = new ObjectInputStream(in)) {
+                Object catalogoRestaurado = si.readObject();
+
+                // Aquí debes restaurar los datos en el objeto correspondiente
+                urjc.setCatalogo((CatalogoProductos)catalogoRestaurado); // Asegúrate de que este método exista
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Datos restaurados con éxito desde: " + ultimaCopia.getName(),
+                        "Restauración completada",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+            }
+        } catch (IOException | ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(
-            null,  "Productos cargados con éxito.",  
-            "Correcto.",  
-            JOptionPane.INFORMATION_MESSAGE
-        );
-        } catch (FileNotFoundException exFnF) {
-            JOptionPane.showMessageDialog(
-            null,  "Fichero no encontrado.",  
-            "Error",  
-            JOptionPane.ERROR_MESSAGE  
-        );
-        } catch (ClassNotFoundException exCnF) {
-            JOptionPane.showMessageDialog(
-            null,  "Error al convertir el objeto.",  
-            "Error",  
-            JOptionPane.ERROR_MESSAGE  
-        );
-        } catch (IOException ex) {
-           JOptionPane.showMessageDialog(
-            null,  "Error de entrada/salida.",  
-            "Error",  
-            JOptionPane.ERROR_MESSAGE  
-        );
+                    null,
+                    "Error al restaurar la copia de seguridad: " + ex.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
         }
+  
     }//GEN-LAST:event_btnRestaurarDatosActionPerformed
 
     /**
@@ -2515,7 +2663,7 @@ public class InterfazBurguer extends javax.swing.JFrame {
                 new InterfazBurguer().setVisible(true);
             }
         });
-     
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
