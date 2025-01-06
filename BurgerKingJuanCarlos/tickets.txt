@@ -1,0 +1,101 @@
+===== TICKET DE PEDIDO =====
+ID Pedido: 6
+Hora del Pedido: 2025-01-06 20:21:42
+
+Productos:
+- costillasbbq : $18.0
+- hamburguesa : $15.0
+- costillasbbq : $18.0
+- costillasbbq : $18.0
+- cuencodefrutapequeño : $3.0
+- cuencodefrutapequeño : $3.0
+- cuencodefrutapequeño : $3.0
+- tropicalpequeña : $1.0
+- tropicalpequeña : $1.0
+
+Precio Total: $80.0
+Tiempo Estimado: 55.0 segundos
+===========================
+
+===== TICKET DE PEDIDO =====
+ID Pedido: 7
+Hora del Pedido: 2025-01-06 20:21:56
+
+Productos:
+- tropicalgrande : $3.0
+- tropicalgrande : $3.0
+- cuencodefrutapequeño : $3.0
+- cuencodefrutapequeño : $3.0
+- hamburguesapollo.jpg : $12.0
+- hamburguesa : $15.0
+- alitasdepollo : $12.0
+
+Precio Total: $51.0
+Tiempo Estimado: 36.0 segundos
+===========================
+
+===== TICKET DE PEDIDO =====
+ID Pedido: 3
+Hora del Pedido: 2025-01-06 20:20:23
+
+Productos:
+- cuencodefrutagrande : $5.0
+- tropicalgrande : $3.0
+- costillasbbq : $18.0
+
+Precio Total: $26.0
+Tiempo Estimado: 16.0 segundos
+===========================
+
+===== TICKET DE PEDIDO =====
+ID Pedido: 2
+Hora del Pedido: 2025-01-06 20:20:11
+
+Productos:
+- costillasbbq : $18.0
+- limonadapequeña : $1.0
+- cuencodefrutapequeño : $3.0
+
+Precio Total: $22.0
+Tiempo Estimado: 16.0 segundos
+===========================
+
+===== TICKET DE PEDIDO =====
+ID Pedido: 1
+Hora del Pedido: 2025-01-06 20:19:39
+
+Productos:
+- alitasdepollo : $12.0
+- limonadamediana : $2.0
+- cuencodefrutagrande : $5.0
+
+Precio Total: $19.0
+Tiempo Estimado: 14.0 segundos
+===========================
+
+===== TICKET DE PEDIDO =====
+ID Pedido: 4
+Hora del Pedido: 2025-01-06 20:21:03
+
+Productos:
+- cuencodefrutapequeño : $3.0
+- tropicalgrande : $3.0
+- hamburguesapollo.jpg : $12.0
+
+Precio Total: $18.0
+Tiempo Estimado: 14.0 segundos
+===========================
+
+===== TICKET DE PEDIDO =====
+ID Pedido: 5
+Hora del Pedido: 2025-01-06 20:21:20
+
+Productos:
+- hamburguesapollo.jpg : $12.0
+- tropicalpequeña : $1.0
+- cuencodefrutamediano : $4.0
+
+Precio Total: $17.0
+Tiempo Estimado: 14.0 segundos
+===========================
+
